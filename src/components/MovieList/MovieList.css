@@ -1,0 +1,11 @@
+.movielist-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: aqua;
+}
+
+.search-form{
+    margin-bottom: 5%;
+}

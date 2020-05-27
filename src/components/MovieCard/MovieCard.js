@@ -28,7 +28,7 @@ export default class MovieCard extends React.Component {
 
     render(){
         return (            
-            <div>
+            <div className="moviecard">
                 <img alt={`movie poster`} src={ URL_IMAGE + this.state.movieData.poster_path} id='movieposter'/>
                 <h2>{this.state.movieData.title}</h2>
             </div>

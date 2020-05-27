@@ -1,4 +1,12 @@
-#movieposter{
-    width: 250px;
-    height: 350px;
+.moviecard{
+    display: flex;
+    margin: 0 auto 50px;
+    max-width: 45%;
+    background-color: chartreuse;
 }
+
+#movieposter{
+    width: 35%;
+    height: 45%;
+}
+

@@ -1,6 +1,7 @@
 import React from 'react';
-import MovieCard from '../MovieCard/MovieCard'
-import {URL_SEARCH, API_KEY} from "../../movie-helpers";
+import MovieCard from '../MovieCard/MovieCard';
+import './MovieList.css';
+import {URL_SEARCH, URL_POPULAR, API_KEY} from "../../movie-helpers";
 
 export default class MovieList extends React.Component {
     constructor(props) {
@@ -11,10 +12,27 @@ export default class MovieList extends React.Component {
             searchTerm: ""
         };
         }
-
+    
+    componentDidMount(){
+        const popularURL = `${URL_POPULAR}${API_KEY}&language=en-US&page=1`;
+        fetch(popularURL)
+            .then((res) => {
+                if(res.ok) {
+                    return res.json();
+                }
+            })
+            .then((responseJson) => {
+                let titles = responseJson.results.map((item) => item.title).join(', ');
+                let movieIds = responseJson.results.map((item) => item.id);
+                this.setState({
+                    moviesList: titles,
+                    movieIds
+                })
+            });
+    }
     search = e => {
         e.preventDefault();
-        const URL = `${URL_SEARCH}${API_KEY}&language=en-US&query=${this.state.searchTerm}&page=1&include_adult=false `;
+        const URL = `${URL_SEARCH}${API_KEY}&language=en-US&query=${this.state.searchTerm}&page=1&include_adult=false`;
         fetch(URL)
           .then((res) => {
             if (res.ok) {
@@ -29,7 +47,6 @@ export default class MovieList extends React.Component {
                 movieIds
             })
           });
-
     }
 
     handleChange = e => {
@@ -40,9 +57,9 @@ export default class MovieList extends React.Component {
 
     render(){
         return (
-          <div>
+          <div className='movielist-wrapper'>
             <h1>Movie Night</h1>
-            <form onSubmit={this.search}>
+            <form onSubmit={this.search} className="search-form">
               <input
                 placeholder="Search for movies"
                 onChange={this.handleChange}
@@ -56,4 +73,4 @@ export default class MovieList extends React.Component {
         );
     }
     
-    }
+}
