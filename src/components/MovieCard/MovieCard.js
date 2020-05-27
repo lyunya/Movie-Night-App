@@ -27,12 +27,19 @@ export default class MovieCard extends React.Component {
     }
 
     render(){
-        return (            
-            <div className="moviecard">
-                <img alt={`movie poster`} src={ URL_IMAGE + this.state.movieData.poster_path} id='movieposter'/>
-                <h2>{this.state.movieData.title}</h2>
+        return (
+          <div className="moviecard">
+            <img
+              alt={`movie poster`}
+              src={URL_IMAGE + this.state.movieData.poster_path}
+              className="movieposter"
+            />
+            <div className="movietext">
+              <h2 className="movietitle">{this.state.movieData.title}</h2>
+              <p className="movieoverview">{this.state.movieData.overview}</p>
             </div>
-        )
+          </div>
+        );
     }
 
 }

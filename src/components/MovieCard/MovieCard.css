@@ -2,11 +2,21 @@
     display: flex;
     margin: 0 auto 50px;
     max-width: 45%;
-    background-color: chartreuse;
 }
 
-#movieposter{
+.movieposter{
     width: 35%;
     height: 45%;
+    object-fit: contain;
+    align-self: flex-start;
+    padding-right: 2%;
+}
+
+.movietitle{
+    font-size: 1em;
+}
+
+.movieoverview{
+    font-size: .6em;
 }
 

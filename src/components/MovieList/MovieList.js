@@ -1,5 +1,6 @@
 import React from 'react';
 import MovieCard from '../MovieCard/MovieCard';
+import { Link } from "react-router-dom";
 import './MovieList.css';
 import {URL_SEARCH, URL_POPULAR, API_KEY} from "../../movie-helpers";
 
@@ -57,8 +58,14 @@ export default class MovieList extends React.Component {
 
     render(){
         return (
-          <div className='movielist-wrapper'>
-            <h1>Movie Night</h1>
+          <div className="movielist-wrapper">
+            <Link
+              to={"/"}
+              style={{ textDecoration: "none" }}
+              className="MovieListPageLink"
+            >
+              <h1>Movie Night</h1>
+            </Link>
             <form onSubmit={this.search} className="search-form">
               <input
                 placeholder="Search for movies"
