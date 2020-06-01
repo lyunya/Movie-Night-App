@@ -1,16 +1,18 @@
-.movielist-wrapper{
+.loginWrapper{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: aqua;
 }
 
-.search-form{
-    margin-bottom: 5%;
+.Intro{
+    width: 200px;
 }
 
-h1{
-    color: black;
+.Intro h2{
+    font-size: 1.2em;
 }
 
+.Intro h3{
+    font-size: .8em;
+}

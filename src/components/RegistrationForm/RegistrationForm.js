@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import "./RegistrationForm.css"
 
 export default class RegistrationForm extends React.Component {
   constructor(props) {
@@ -11,7 +12,7 @@ export default class RegistrationForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log("login button works");
+    console.log("register account button works");
   };
 
   render() {
@@ -40,7 +41,7 @@ export default class RegistrationForm extends React.Component {
         <form className="registrationForm" onSubmit={this.handleSubmit}>
           <div className="email">
             <label htmlFor="RegistrationForm_email">Email</label>
-            <input required name="email" id="Registration_email" />
+            <input required name="email" id="Registration_email" autocomplete="email"/>
           </div>
           <div className="password">
             <label htmlFor="RegistrationForm_password">Password</label>
@@ -49,6 +50,7 @@ export default class RegistrationForm extends React.Component {
               name="password"
               type="password"
               id="Registration_password"
+              autocomplete="new-password"
             />
           </div>
           <button type="submit">Register</button>

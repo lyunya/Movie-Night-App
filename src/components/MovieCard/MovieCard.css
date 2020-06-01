@@ -5,11 +5,16 @@
 }
 
 .movieposter{
+    min-width: 125px;
     width: 35%;
     height: 45%;
     object-fit: contain;
     align-self: flex-start;
     padding-right: 2%;
+}
+
+movietext{
+    flex: 1 1 auto;
 }
 
 .movietitle{
@@ -20,3 +25,7 @@
     font-size: .6em;
 }
 
+
+
+
+/* set media query for desktop view; set the width and height */
