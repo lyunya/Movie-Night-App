@@ -1,12 +1,3 @@
 .App{
     display: flex;
 }
-
-.movielist_nav{
-    display: flex;
-    float: left;
-    flex-direction: column;
-    clear: left;
-    background-color: rosybrown;
-    width: 250px;
-}

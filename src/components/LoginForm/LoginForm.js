@@ -20,15 +20,7 @@ export default class LoginForm extends Component {
       <div className="loginWrapper">
         <nav className="loginNav">
           <Link
-            to={"/registration"}
-            style={{ textDecoration: "none" }}
-            className="registrationPageLink"
-          >
-            Create Account
-          </Link>
-          <br />
-          <Link
-            to={"/"}
+            to={"/search"}
             style={{ textDecoration: "none" }}
             className="HomePageLink"
           >
@@ -41,7 +33,7 @@ export default class LoginForm extends Component {
           </h2>
           <h3>
             This app will help you create a voting list of your movie choices,
-            and everyone in the group can vote which movie they want to watch
+            and everyone in the group can vote which movie they want to watch!
           </h3>
         </div>
         <form className="LoginForm" onSubmit={this.handleSubmit}>
@@ -61,6 +53,15 @@ export default class LoginForm extends Component {
           </div>
           <button type="submit">Login</button>
         </form>
+        <br />
+        <p>Are you a new user? Register to create an account</p>
+        <Link
+          to={"/registration"}
+          style={{ textDecoration: "none" }}
+          className="registrationPageLink"
+        >
+          <button>Register</button>
+        </Link>
       </div>
     );
   }

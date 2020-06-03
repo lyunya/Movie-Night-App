@@ -3,42 +3,62 @@ import MovieCard from "../MovieCard/MovieCard";
 import { Link } from "react-router-dom";
 import "./MovieList.css";
 import MovieNightContext from "../../MovieNightContext";
-import { URL_SEARCH, URL_POPULAR, API_KEY } from "../../movie-helpers";
+import MovieListNav from '../MovieListNav/MovieListNav'
 
 export default class MovieList extends React.Component {
   static contextType = MovieNightContext;
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      movieData: props.movieData,
+    };
   }
 
-  handleClick = (movieId) => {
+  handleVoteClick = (movie) => {
     console.log("vote clicked");
-    console.log("this is movieID", movieId);
+    console.log(this.props, 'this.props')
+    console.log("# of votes", movie.votes = movie.votes + 1);
+    this.setState({
+      movieData: movie
+    })
   };
 
   render() {
-    console.log(this.props);
+
     return (
       <div className="movielist-wrapper">
         <MovieNightContext.Consumer>
           {(context) => (
             <>
-              <Link
-                to={"/"}
-                style={{ textDecoration: "none" }}
-                className="MovieListPageLink"
-              >
-                <button className="addmovie-btn">Add Movie to List</button>
-              </Link>
-              <h2>{context.currentListSelected.name}</h2>
+              <nav className="App_nav">
+                <MovieListNav
+                  lists={this.props.lists}
+                  handleAddList={this.props.handleAddList}
+                />
+              </nav>
+              <div className="MovieList-heading">
+                <h2>{context.currentListSelected.name}</h2>
+                <Link
+                  to={"/search"}
+                  style={{ textDecoration: "none" }}
+                  className="MovieListPageLink"
+                >
+                  <button className="addmovielist-btn">
+                    Add Movie to List
+                  </button>
+                </Link>
+              </div>
               {this.props.movies.map((movie) => {
                 return (
-                  <div>
+                  <div className="MovieList-cards">
                     <MovieCard movieData={movie} key={movie.id} />
-                    <button onClick={() => this.handleClick(movie.id)}>
+                    <button
+                      className="votemovie-btn"
+                      onClick={() => this.handleVoteClick(movie)}
+                    >
                       Vote
                     </button>
+                    <p>{`${this.state.votes} votes`}</p>
                   </div>
                 );
               })}

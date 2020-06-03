@@ -41,8 +41,9 @@ export default class MovieListNav extends React.Component {
           {(context) => (
             <>
               <ul className="MovieListNav_list">
+                <h3>Movie Lists</h3>
                 {this.props.lists.map((list) => (
-                  <li key={list.id}>
+                  <li key={list.id} className="MovieListItem">
                     <NavLink
                       className="MovieListNav_list-link"
                       to={`/list/${list.id}`}
@@ -53,7 +54,7 @@ export default class MovieListNav extends React.Component {
                   </li>
                 ))}
               </ul>
-              <form onSubmit={this.onSubmit}>
+              <form onSubmit={this.onSubmit} className="newList-form">
                 <input
                   value={this.state.value}
                   onChange={this.onInput}

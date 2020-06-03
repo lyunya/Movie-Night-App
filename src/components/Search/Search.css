@@ -1,0 +1,48 @@
+.movielist-wrapper{
+    display:flex;
+    justify-content: center;
+    flex-flow: row wrap;
+}
+.App_nav{
+    height: 100%;
+    position: fixed;
+    left: 0;
+    overflow-x: hidden;
+    display: inline-block;
+}
+.search-content{
+    text-align: center;
+    justify-content: center;
+}
+
+
+.addmovie-btn{
+display:inline-block;
+padding:0.35em 1.2em;
+border:0.1em solid #000000;
+margin:0 0.3em 0.3em 20em;
+border-radius:0.12em;
+box-sizing: border-box;
+text-decoration:none;
+font-family:'Roboto',sans-serif;
+font-weight:300;
+color:#000000;
+text-align:center;
+transition: all 0.2s;
+}
+
+.addmovie-btn:hover{
+color:#FFFFFF;
+background-color:#000000;
+}
+
+p{
+    text-align: center;
+}
+
+@media all and (max-width:30em){
+.addmovie-btn{
+display:block;
+margin:0.4em auto;
+}
+}

@@ -2,6 +2,9 @@ import React from "react";
 import MovieCard from "../MovieCard/MovieCard";
 import { Link } from "react-router-dom";
 import { URL_SEARCH, API_KEY, URL_POPULAR } from "../../movie-helpers";
+import "./Search.css";
+import MovieNightContext from "../../MovieNightContext";
+import MovieListNav from "../MovieListNav/MovieListNav"
 
 export default class Search extends React.Component {
   constructor(props) {
@@ -11,6 +14,7 @@ export default class Search extends React.Component {
       movieIds: [],
       searchTerm: "",
       moviedata: [],
+      hover: false
     };
   }
 
@@ -58,23 +62,66 @@ export default class Search extends React.Component {
     });
   };
 
+  handleAddMovie = (movie) => {
+    console.log('movie added', movie);
+  }
+
+  toggleHover(){
+    this.setState({
+      hover: !this.state.hover
+    })
+  }
+
   render() {
+    // let buttonHover;
+    // if (this.state.hover){
+    //   buttonHover = {display: 'inline-block'}
+    //   console.log('hovered')
+    // } else {
+    //   buttonHover = {display: 'none'}
+    //   console.log('not hovered')
+    // }
     return (
       <div className="movielist-wrapper">
-        <Link
-          to={"/"}
-          style={{ textDecoration: "none" }}
-          className="MovieListPageLink"
-        >
-          <h1>Movie Night</h1>
-        </Link>
-        <form onSubmit={this.search} className="search-form">
-          <input placeholder="Search for movies" onChange={this.handleChange} />
-          <button type="submit">Search</button>
-        </form>
-        {this.state.moviedata.map((movie) => {
-          return <MovieCard movieData={movie} key={movie.id} />;
-        })}
+        <MovieNightContext.Consumer>
+          {(context) => (
+            <>
+              <nav className="App_nav">
+                <MovieListNav
+                  lists={this.props.lists}
+                />
+              </nav>
+              <div className="search-content">
+                  <h1>Movie Night</h1>
+                <p>
+                  Create a Movie List on the left and
+                  <br />
+                  add movies you want to watch
+                </p>
+                <form onSubmit={this.search} className="search-form">
+                  <input
+                    placeholder="Search for movies"
+                    onChange={this.handleChange}
+                  />
+                  <button type="submit">Search</button>
+                </form>
+                {this.state.moviedata.map((movie) => {
+                  return (
+                    <div className="movieCard-search">
+                      <MovieCard movieData={movie} key={movie.id} />
+                      <button
+                        className="addmovie-btn"
+                        onClick={() => this.handleAddMovie({ movie })}
+                      >
+                        Add Movie to the List
+                      </button>
+                    </div>
+                  );
+                })}
+              </div>
+            </>
+          )}
+        </MovieNightContext.Consumer>
       </div>
     );
   }

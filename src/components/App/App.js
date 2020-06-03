@@ -3,7 +3,6 @@ import { Route, Switch } from "react-router-dom";
 import LoginForm from "../LoginForm/LoginForm";
 import RegistrationForm from "../RegistrationForm/RegistrationForm";
 import MovieList from "../MovieList/MovieList";
-import MovieListNav from "../MovieListNav/MovieListNav";
 import Search from "../Search/Search";
 import dummyStore from "../../dummy-store";
 import { getMoviesForList } from "../../movie-helpers";
@@ -16,6 +15,7 @@ class App extends React.Component {
     lists: [],
     movies: [],
     currentListSelected: {},
+    votes: 0,
   };
 
   componentDidMount() {
@@ -32,62 +32,36 @@ class App extends React.Component {
     this.setState({ lists: newList });
   };
 
-  renderMovieListRoutes() {
-    const { lists, movies } = this.state;
-
-    return (
-      <>
-        {["/", "/list/:listId"].map((path) => (
-          <Route
-            exact
-            key={path}
-            path={path}
-            render={(routeProps) => (
-              <>
-                <div className="movielist_nav">
-                  {" "}
-                  <MovieListNav
-                    lists={lists}
-                    movies={movies}
-                    {...routeProps}
-                    handleAddList={this.handleAddList}
-                  />
-                </div>
-              </>
-            )}
-          />
-        ))}
-      </>
-    );
-  }
-
   render() {
     const contextValue = {
       lists: this.state.lists,
       movies: this.state.movies,
       currentListSelected: this.state.currentListSelected,
       setCurrentListSelected: this.setCurrentListSelected,
+      votes: this.votes,
     };
     return (
       <div className="App">
         <MovieNightContext.Provider value={contextValue}>
-          <nav className="App_nav">
-            <MovieListNav
-              lists={this.state.lists}
-              movies={this.state.movies}
-              handleAddList={this.handleAddList}
-            />
-          </nav>
           <main className="App_Main">
             <Switch>
-              <Route exact path={"/"} component={Search} />
-              <Route path={"/login"} component={LoginForm} />
+              <Route exact path={"/"} component={LoginForm} />
+              <Route path={"/search"} render={() => {
+                return (
+                  <Search
+                    lists={this.state.lists}
+                    handleAddList={this.handleAddList}
+                  />
+                );
+              }} />
               <Route path="/registration" component={RegistrationForm} />
               <Route
                 path="/list/:listId"
                 render={(routeProps) => {
                   return (
                     <MovieList
+                      lists={this.state.lists}
+                      handleAddList={this.handleAddList}
                       movies={getMoviesForList(
                         this.state.movies,
                         routeProps.match.params.listId

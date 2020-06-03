@@ -26,6 +26,7 @@ export default {
       runtime: "123 minutes",
       poster_path: "/xBHvZcjRiWyobQ9kxBhO6B2dtRI.jpg",
       movielist_id: 0,
+      votes: 0
     },
     {
       id: 1,
@@ -36,6 +37,7 @@ export default {
       runtime: "120 minutes",
       poster_path: "/5jdLnvALCpK1NkeQU1z4YvOe2dZ.jpg",
       movielist_id: 1,
+      votes: 0
     },
     {
       id: 2,
@@ -46,6 +48,7 @@ export default {
       runtime: "90 minutes",
       poster_path: "/aQvJ5WPzZgYVDrxLX4R6cLJCEaQ.jpg",
       movielist_id: 2,
+      votes: 0
     },
     {
       id: 3,
@@ -56,6 +59,7 @@ export default {
       runtime: "100 minutes",
       poster_path: "/y95lQLnuNKdPAzw9F9Ab8kJ80c3.jpg",
       movielist_id: 2,
+      votes: 0
     },
     {
       id: 4,
@@ -66,6 +70,7 @@ export default {
       runtime: "150 minutes",
       poster_path: "/iZf0KyrE25z1sage4SYFLCCrMi9.jpg",
       movielist_id: 2,
+      votes: 0
     },
     {
       id: 5,
@@ -75,6 +80,7 @@ export default {
       runtime: "90 minutes",
       poster_path: "/2bXbqYdUdNVa8VIWXVfclP2ICtT.jpg",
       movielist_id: 1,
+      votes: 0
     },
     {
       id: 6,
@@ -85,6 +91,7 @@ export default {
       runtime: "115 minutes",
       poster_path: "/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg",
       movielist_id: 0,
+      votes: 0
     },
   ],
 };
