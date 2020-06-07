@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import MovieNightContext from "../../MovieNightContext";
 import "./MovieListNav.css";
 
+
 export default class MovieListNav extends React.Component {
   static contextType = MovieNightContext;
 
@@ -10,7 +11,8 @@ export default class MovieListNav extends React.Component {
     super(props);
     this.state = {
       input: "",
-      error: "",
+      hasError: false,
+      errorMessage: '',
     };
   }
 
@@ -23,7 +25,17 @@ export default class MovieListNav extends React.Component {
   // submit handler
   onSubmit = (e) => {
     e.preventDefault();
-    this.props.handleAddList(this.state.input);
+    if(this.state.input.length === 0){
+      this.setState({
+        errorMessage : 'Please enter List Name'
+      })
+    } else if (this.state.input.length >= 15){
+      this.setState({
+        errorMessage: "Please enter shorter List Name",
+      });
+    } else {    
+      this.props.handleAddList(this.state.input);
+    }
     e.target.reset();
     this.setState({
       input: "",
@@ -33,8 +45,9 @@ export default class MovieListNav extends React.Component {
   onClick = (context, list) => {
     context.setCurrentListSelected(list);
   };
+
+
   render() {
-    console.log("lists", this.props.lists);
     return (
       <div className="MovieListNav">
         <MovieNightContext.Consumer>
@@ -56,12 +69,14 @@ export default class MovieListNav extends React.Component {
               </ul>
               <form onSubmit={this.onSubmit} className="newList-form">
                 <input
+                  className="newList-input"
                   value={this.state.value}
                   onChange={this.onInput}
                   type="text"
                   placeholder="Enter List Name"
                 />
-                <button type="submit">Create New list</button>
+                <button type="submit">Create New List</button>
+                <p>{this.state.errorMessage}</p>
               </form>
             </>
           )}

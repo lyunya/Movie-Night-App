@@ -1,3 +1,9 @@
-.App{
-    display: flex;
+.App {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #F1FAEE;
+}
+
+.App_Main{
+    width: 100%;
 }

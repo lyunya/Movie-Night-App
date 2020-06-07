@@ -1,11 +1,39 @@
 .MovieListNav{
+    height: 100%;
+    flex-direction: column;
+    position: fixed;
     display: inline-block;
-    list-style: none;
-    min-width: 150px;
-    width: 250px;
-
+    z-index: 1;
+    left: 0;
+    overflow-x: hidden;
+    overflow:auto;
+    justify-content: center;
+    
 }
 
 .MovieListItem{
     list-style-type: none;
+    text-decoration: none;
+    display: block;
+    padding-bottom: 3px;
+    
 }
+.MovieListNav_list-link{
+    text-decoration: none;
+    color: black;
+}
+.MovieListNav_list-link:active,
+.MovieListNav_list-link:hover{
+    color: coral;
+}
+.MovieListNav_list-link:visited{
+    text-decoration: none;
+    color: black;
+
+}
+
+.newList-input{
+    display: block;
+    margin-left: 10px;
+}
+

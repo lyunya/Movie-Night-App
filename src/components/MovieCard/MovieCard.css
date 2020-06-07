@@ -1,6 +1,6 @@
 .moviecard{
-    display:flex;
-    margin: 20px auto 10px;
+    margin: 20px auto auto;
+    min-width: 125px;
     max-width: 45%;
     box-shadow: 0px 6px 18px rgba(0,0,0,.1);
     border-radius: 8px;
@@ -37,3 +37,8 @@ movietext{
 
 
 /* set media query for desktop view; set the width and height */
+@media (min-width: 767px) {
+.moviecard{
+    display: flex;
+}
+}

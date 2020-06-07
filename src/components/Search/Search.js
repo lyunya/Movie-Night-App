@@ -1,10 +1,11 @@
 import React from "react";
 import MovieCard from "../MovieCard/MovieCard";
-import { Link } from "react-router-dom";
 import { URL_SEARCH, API_KEY, URL_POPULAR } from "../../movie-helpers";
 import "./Search.css";
 import MovieNightContext from "../../MovieNightContext";
-import MovieListNav from "../MovieListNav/MovieListNav"
+import MovieListNav from "../MovieListNav/MovieListNav";
+import Modal from '../AddMovieModal/AddMovieModal';
+import Backdrop from '../AddMovieModal/Backdrop';
 
 export default class Search extends React.Component {
   constructor(props) {
@@ -14,9 +15,11 @@ export default class Search extends React.Component {
       movieIds: [],
       searchTerm: "",
       moviedata: [],
-      hover: false
+      AddMovieModal: false,
     };
   }
+
+  static contextType = MovieNightContext;
 
   componentDidMount() {
     const popularURL = `${URL_POPULAR}${API_KEY}&language=en-US&page=1`;
@@ -63,36 +66,33 @@ export default class Search extends React.Component {
   };
 
   handleAddMovie = (movie) => {
-    console.log('movie added', movie);
+    console.log("movie added", movie);
+    this.setState({AddMovieModal: true})
+  };
+
+  modalAddMovieHandler = (movie) => {
+    console.log(movie, 'this is the movie')
   }
 
-  toggleHover(){
-    this.setState({
-      hover: !this.state.hover
-    })
+  modalCancelHandler = () => {
+    this.setState({ AddMovieModal: false });
   }
 
   render() {
-    // let buttonHover;
-    // if (this.state.hover){
-    //   buttonHover = {display: 'inline-block'}
-    //   console.log('hovered')
-    // } else {
-    //   buttonHover = {display: 'none'}
-    //   console.log('not hovered')
-    // }
+    const { lists=[] } = this.context;
     return (
       <div className="movielist-wrapper">
         <MovieNightContext.Consumer>
           {(context) => (
             <>
-              <nav className="App_nav">
+              <div className="sidebar">
                 <MovieListNav
                   lists={this.props.lists}
+                  handleAddList={this.props.handleAddList}
                 />
-              </nav>
+              </div>
               <div className="search-content">
-                  <h1>Movie Night</h1>
+                <h1>Movie Night</h1>
                 <p>
                   Create a Movie List on the left and
                   <br />
@@ -105,6 +105,22 @@ export default class Search extends React.Component {
                   />
                   <button type="submit">Search</button>
                 </form>
+                {this.state.AddMovieModal && <Backdrop />}
+                {this.state.AddMovieModal && (
+                  <Modal
+                    canAddMovie
+                    canCancel 
+                    onAddMovie={this.modalAddMovieHandler()}
+                    onCancel={this.modalCancelHandler}
+                  >
+                   <select id='movie-list-select' name='movie-list-id'>
+                     {lists.map(list =>
+                      <option key={list.id} value={list.id}>
+                        {list.name}
+                      </option>)}
+                      </select>
+                  </Modal>
+                )}
                 {this.state.moviedata.map((movie) => {
                   return (
                     <div className="movieCard-search">
@@ -113,7 +129,7 @@ export default class Search extends React.Component {
                         className="addmovie-btn"
                         onClick={() => this.handleAddMovie({ movie })}
                       >
-                        Add Movie to the List
+                        Add Movie to a List
                       </button>
                     </div>
                   );

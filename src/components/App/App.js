@@ -8,6 +8,10 @@ import dummyStore from "../../dummy-store";
 import { getMoviesForList } from "../../movie-helpers";
 import MovieNightContext from "../../MovieNightContext";
 import "./App.css";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fab } from "@fortawesome/free-brands-svg-icons";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+library.add(fab, faBars);
 const { uuid } = require("uuidv4");
 
 class App extends React.Component {
@@ -15,21 +19,40 @@ class App extends React.Component {
     lists: [],
     movies: [],
     currentListSelected: {},
-    votes: 0,
+    menuOpen: false,
   };
 
   componentDidMount() {
     setTimeout(() => this.setState(dummyStore), 500);
   }
+  
   setCurrentListSelected = (obj) => {
     this.setState({ currentListSelected: obj });
   };
+  
   handleAddList = (list) => {
     const newList = [
       ...this.state.lists,
       { name: list, id: uuid(), user_id: 0 },
     ];
     this.setState({ lists: newList });
+  };
+
+  handleAddMovie = (movie) => {
+    this.setState({
+      movies: [...this.state.movies, movie],
+    });
+  }
+
+  addVoteClick = (movieId) => {
+    console.log("clicked");
+    this.setState({
+      movies: this.state.movies.map((movie) =>
+        movie.id === movieId
+          ? Object.assign({}, movie, { votes: movie.votes + 1 })
+          : movie
+      ),
+    });
   };
 
   render() {
@@ -46,14 +69,18 @@ class App extends React.Component {
           <main className="App_Main">
             <Switch>
               <Route exact path={"/"} component={LoginForm} />
-              <Route path={"/search"} render={() => {
-                return (
-                  <Search
-                    lists={this.state.lists}
-                    handleAddList={this.handleAddList}
-                  />
-                );
-              }} />
+              <Route
+                path={"/search"}
+                render={() => {
+                  return (
+                    <Search
+                      lists={this.state.lists}
+                      handleAddList={this.handleAddList}
+                      handleAddMovie={this.handleAddMovie}
+                    />
+                  );
+                }}
+              />
               <Route path="/registration" component={RegistrationForm} />
               <Route
                 path="/list/:listId"
@@ -64,8 +91,9 @@ class App extends React.Component {
                       handleAddList={this.handleAddList}
                       movies={getMoviesForList(
                         this.state.movies,
-                        routeProps.match.params.listId
+                        Number(routeProps.match.params.listId)
                       )}
+                      addVoteClick={this.addVoteClick}
                     />
                   );
                 }}
