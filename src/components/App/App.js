@@ -39,13 +39,14 @@ class App extends React.Component {
   };
 
   handleAddMovie = (movie) => {
+    const newMovies =[...this.state.movies, movie]
     this.setState({
-      movies: [...this.state.movies, movie],
+      movies: newMovies,
     });
   }
 
   addVoteClick = (movieId) => {
-    console.log("clicked");
+
     this.setState({
       movies: this.state.movies.map((movie) =>
         movie.id === movieId
@@ -62,6 +63,7 @@ class App extends React.Component {
       currentListSelected: this.state.currentListSelected,
       setCurrentListSelected: this.setCurrentListSelected,
       votes: this.votes,
+      addMovie: this.handleAddMovie
     };
     return (
       <div className="App">

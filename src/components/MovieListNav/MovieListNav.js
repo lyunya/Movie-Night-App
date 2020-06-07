@@ -12,30 +12,26 @@ export default class MovieListNav extends React.Component {
     this.state = {
       input: "",
       hasError: false,
-      errorMessage: '',
+      errorMessage: "",
+      listValid: false
     };
   }
 
   // input change handler
-  onInput = (e) =>
+  onInput = (e) => {    
     this.setState({
       input: e.target.value,
-    });
+    }, ()=>{
+      this.validateEntry(this.state.input)
+    }
+    )
+    
+    };
 
   // submit handler
   onSubmit = (e) => {
     e.preventDefault();
-    if(this.state.input.length === 0){
-      this.setState({
-        errorMessage : 'Please enter List Name'
-      })
-    } else if (this.state.input.length >= 15){
-      this.setState({
-        errorMessage: "Please enter shorter List Name",
-      });
-    } else {    
       this.props.handleAddList(this.state.input);
-    }
     e.target.reset();
     this.setState({
       input: "",
@@ -46,6 +42,24 @@ export default class MovieListNav extends React.Component {
     context.setCurrentListSelected(list);
   };
 
+  validateEntry = (value) => {
+    value = value.trim();
+    if (value.length < 1) {
+      this.setState({
+        errorMessage: "please enter list name",
+        listValid:false
+      });
+    } else if (value.length > 15){
+      this.setState({
+        errorMessage: "please enter shorter list name",
+        listValid: false,
+      });
+    } else {
+      this.setState({
+        listValid: true,
+      });
+    }
+  }
 
   render() {
     return (
@@ -75,7 +89,9 @@ export default class MovieListNav extends React.Component {
                   type="text"
                   placeholder="Enter List Name"
                 />
-                <button type="submit">Create New List</button>
+                <button type="submit" disabled={!this.state.listValid}>
+                  Create New List
+                </button>
                 <p>{this.state.errorMessage}</p>
               </form>
             </>

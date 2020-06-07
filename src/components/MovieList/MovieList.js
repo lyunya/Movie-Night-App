@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import "./MovieList.css";
 import MovieNightContext from "../../MovieNightContext";
 import MovieListNav from "../MovieListNav/MovieListNav";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 
 export default class MovieList extends React.Component {
   static contextType = MovieNightContext;
