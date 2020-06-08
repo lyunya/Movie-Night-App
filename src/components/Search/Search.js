@@ -4,8 +4,9 @@ import { URL_SEARCH, API_KEY, URL_POPULAR } from "../../movie-helpers";
 import "./Search.css";
 import MovieNightContext from "../../MovieNightContext";
 import MovieListNav from "../MovieListNav/MovieListNav";
-import Modal from '../AddMovieModal/AddMovieModal';
-import Backdrop from '../AddMovieModal/Backdrop';
+import Modal from "../AddMovieModal/AddMovieModal";
+import Backdrop from "../AddMovieModal/Backdrop";
+
 
 export default class Search extends React.Component {
   constructor(props) {
@@ -38,15 +39,15 @@ export default class Search extends React.Component {
           movieIds,
           movieData,
         });
-      })
+      });
   }
-onListSelect = (event)=>{
-  const movieWithListId = {
-    ...this.state.movieToAdd,
-    movielist_id: event.target.value,
+  onListSelect = (event) => {
+    const movieWithListId = {
+      ...this.state.movieToAdd,
+      movielist_id: event.target.value,
+    };
+    this.setState({ movieToAdd: movieWithListId });
   };
-  this.setState({ movieToAdd:movieWithListId });
-}
   search = (e) => {
     e.preventDefault();
     const URL = `${URL_SEARCH}${API_KEY}&language=en-US&query=${this.state.searchTerm}&page=1&include_adult=false`;
@@ -73,32 +74,32 @@ onListSelect = (event)=>{
   };
 
   handleAddMovie = (movieObj) => {
-   const movie = movieObj.movie
-    const movieDetailsObj= {
+    const movie = movieObj.movie;
+    const movieDetailsObj = {
       id: 0,
       title: movie.original_title,
       overview: movie.overview,
       poster_path: movie.poster_path,
-      votes:0
-    }
+      votes: 0,
+    };
     this.setState({
       AddMovieModal: true,
-      movieToAdd: movieDetailsObj
-    })
+      movieToAdd: movieDetailsObj,
+    });
   };
 
   modalAddMovieHandler = () => {
     const newMovie = this.state.movieToAdd;
-   this.context.addMovie(newMovie);
-   this.setState({ AddMovieModal: false });
-  }
+    this.context.addMovie(newMovie);
+    this.setState({ AddMovieModal: false });
+  };
 
   modalCancelHandler = () => {
     this.setState({ AddMovieModal: false });
-  }
+  };
 
   render() {
-    const { lists=[] } = this.context;
+    const { lists = [] } = this.context;
     return (
       <div className="movielist-wrapper">
         <MovieNightContext.Consumer>
@@ -139,7 +140,11 @@ onListSelect = (event)=>{
                         Select your movie list
                       </option>
                       {lists.map((list) => (
-                        <option key={list.id} value={list.id} className='list-options'>
+                        <option
+                          key={list.id}
+                          value={list.id}
+                          className="list-options"
+                        >
                           {list.name}
                         </option>
                       ))}

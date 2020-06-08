@@ -1,7 +1,10 @@
 import React from 'react';
 import './AddMovieModal.css'
 
+
 export default function Modal(props) {
+  
+
     return (
       <div className="addmovie-modal">
         <section className="modal_content">{props.children}</section>

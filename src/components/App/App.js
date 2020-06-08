@@ -11,6 +11,9 @@ import "./App.css";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+toast.configure();
 library.add(fab, faBars);
 const { uuid } = require("uuidv4");
 
@@ -36,13 +39,17 @@ class App extends React.Component {
       { name: list, id: uuid(), user_id: 0 },
     ];
     this.setState({ lists: newList });
+    this.notify();
   };
+
+  notify = () => toast("added!", { autoClose: 2000});
 
   handleAddMovie = (movie) => {
     const newMovies =[...this.state.movies, movie]
     this.setState({
       movies: newMovies,
     });
+    this.notify();
   }
 
   addVoteClick = (movieId) => {
