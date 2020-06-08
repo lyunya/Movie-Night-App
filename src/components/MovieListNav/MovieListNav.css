@@ -1,16 +1,3 @@
-.MovieListNav{
-    height: 100%;
-    flex-direction: column;
-    position: fixed;
-    display: inline-block;
-    z-index: 1;
-    left: 0;
-    overflow-x: hidden;
-    overflow:auto;
-    justify-content: center;
-    
-} 
-
 .MovieListItem{
     list-style-type: none;
     text-decoration: none;
@@ -79,26 +66,16 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 /* General sidebar styles */
 .bm-menu {
-  background: #373a47;
-  padding: 2.5em 1.5em 0;
-  font-size: 1.15em;
-}
+  background: #F1FAEE;
+  padding-top: 2.5em;
 
-/* Morph shape necessary with bubble or elastic */
-.bm-morph-shape {
-  fill: #373a47;
-}
-
-/* Wrapper for item list */
-.bm-item-list {
-  color: #b8b7ad;
-  padding: 0.8em;
 }
 
 /* Individual item */
-.bm-item {
+/* .bm-item {
   display: inline-block;
-}
+} */
+ .bm-menu { overflow-y: hidden !important; } 
 
 /* Styling of overlay */
 .bm-overlay {
