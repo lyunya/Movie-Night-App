@@ -1,5 +1,4 @@
 .movielist-wrapper {
-  display: flex;
   flex-direction: column;
   text-align: center;
   width: 100%;
@@ -10,14 +9,7 @@
   width: 100%;
 }
 
-/* .sidebar{
-    width: 25%;
-    flex: 1;
-}
-.main-content{
-    width: 75%;
-    flex: 3;
-} */
+
 :root {
   --sidebar-width: 100px;
 }
