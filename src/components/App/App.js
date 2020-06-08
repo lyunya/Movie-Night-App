@@ -22,7 +22,6 @@ class App extends React.Component {
     lists: [],
     movies: [],
     currentListSelected: {},
-    menuOpen: false,
   };
 
   componentDidMount() {
@@ -42,7 +41,7 @@ class App extends React.Component {
     this.notify();
   };
 
-  notify = () => toast("added!", { autoClose: 2000});
+  notify = () => toast("added!", { autoClose: 2000, className:"toast-notification"});
 
   handleAddMovie = (movie) => {
     const newMovies =[...this.state.movies, movie]

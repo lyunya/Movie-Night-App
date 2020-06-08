@@ -19,6 +19,7 @@ export default class Search extends React.Component {
       movieToAdd: {},
       AddMovieModal: false,
       listSelected: "",
+      canAddMovie: false,
     };
   }
 
@@ -46,7 +47,7 @@ export default class Search extends React.Component {
       ...this.state.movieToAdd,
       movielist_id: event.target.value,
     };
-    this.setState({ movieToAdd: movieWithListId });
+    this.setState({ movieToAdd: movieWithListId, canAddMovie: true });
   };
   search = (e) => {
     e.preventDefault();
@@ -91,11 +92,11 @@ export default class Search extends React.Component {
   modalAddMovieHandler = () => {
     const newMovie = this.state.movieToAdd;
     this.context.addMovie(newMovie);
-    this.setState({ AddMovieModal: false });
+    this.setState({ AddMovieModal: false, canAddMovie: false });
   };
 
   modalCancelHandler = () => {
-    this.setState({ AddMovieModal: false });
+    this.setState({ AddMovieModal: false, canAddMovie: false });
   };
 
   render() {
@@ -128,6 +129,7 @@ export default class Search extends React.Component {
                 {this.state.AddMovieModal && <Backdrop />}
                 {this.state.AddMovieModal && (
                   <Modal
+                    canAddMovie={this.state.canAddMovie}
                     onAddMovie={this.modalAddMovieHandler}
                     onCancel={this.modalCancelHandler}
                   >
