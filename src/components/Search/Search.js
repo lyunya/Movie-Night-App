@@ -30,7 +30,6 @@ export default class Search extends React.Component {
         !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
       )
       .then((responseJson) => {
-        console.log(responseJson.results);
         let titles = responseJson.results.map((item) => item.title).join(", ");
         let movieIds = responseJson.results.map((item) => item.id);
         let movieData = responseJson.results.map((item) => item);
@@ -128,8 +127,6 @@ onListSelect = (event)=>{
                 {this.state.AddMovieModal && <Backdrop />}
                 {this.state.AddMovieModal && (
                   <Modal
-                    // canAddMovie
-                    // canCancel
                     onAddMovie={this.modalAddMovieHandler}
                     onCancel={this.modalCancelHandler}
                   >

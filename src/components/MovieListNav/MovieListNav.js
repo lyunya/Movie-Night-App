@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import MovieNightContext from "../../MovieNightContext";
+import { slide as Menu } from "react-burger-menu";
 import "./MovieListNav.css";
 
 
@@ -46,10 +47,10 @@ export default class MovieListNav extends React.Component {
     value = value.trim();
     if (value.length < 1) {
       this.setState({
-        errorMessage: "please enter list name",
+        errorMessage: "",
         listValid:false
       });
-    } else if (value.length > 15){
+    } else if (value.length > 25){
       this.setState({
         errorMessage: "please enter shorter list name",
         listValid: false,
@@ -67,33 +68,35 @@ export default class MovieListNav extends React.Component {
         <MovieNightContext.Consumer>
           {(context) => (
             <>
-              <ul className="MovieListNav_list">
-                <h3>Movie Lists</h3>
-                {this.props.lists.map((list) => (
-                  <li key={list.id} className="MovieListItem">
-                    <NavLink
-                      className="MovieListNav_list-link"
-                      to={`/list/${list.id}`}
-                      onClick={(e) => this.onClick(context, list)}
-                    >
-                      {list.name}
-                    </NavLink>
-                  </li>
-                ))}
-              </ul>
-              <form onSubmit={this.onSubmit} className="newList-form">
-                <input
-                  className="newList-input"
-                  value={this.state.value}
-                  onChange={this.onInput}
-                  type="text"
-                  placeholder="Enter List Name"
-                />
-                <button type="submit" disabled={!this.state.listValid}>
-                  Create New List
-                </button>
-                <p>{this.state.errorMessage}</p>
-              </form>
+              <Menu>
+                <ul className="MovieListNav_list">
+                  <h3>Movie Lists</h3>
+                  {this.props.lists.map((list) => (
+                    <li key={list.id} className="MovieListItem">
+                      <NavLink
+                        className="MovieListNav_list-link"
+                        to={`/list/${list.id}`}
+                        onClick={(e) => this.onClick(context, list)}
+                      >
+                        {list.name}
+                      </NavLink>
+                    </li>
+                  ))}
+                </ul>
+                <form onSubmit={this.onSubmit} className="newList-form">
+                  <input
+                    className="newList-input"
+                    value={this.state.value}
+                    onChange={this.onInput}
+                    type="text"
+                    placeholder="Enter List Name"
+                  />
+                  <button type="submit" disabled={!this.state.listValid}>
+                    Create New List
+                  </button>
+                  <p>{this.state.errorMessage}</p>
+                </form>
+              </Menu>
             </>
           )}
         </MovieNightContext.Consumer>
