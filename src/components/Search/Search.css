@@ -4,16 +4,16 @@
     min-height: 100vh;
     flex-flow: row wrap;
 }
-/* .sidebar{
-    width: 25%;
-    flex: 1;
-} */
+
 
 .search-content{
     text-align: center;
     justify-content: center;
-    /* width: 75%;
-    flex: 3; */
+
+}
+
+.list-options{
+    font-size: 16px;
 }
 
 

@@ -139,7 +139,7 @@ onListSelect = (event)=>{
                         Select your movie list
                       </option>
                       {lists.map((list) => (
-                        <option key={list.id} value={list.id}>
+                        <option key={list.id} value={list.id} className='list-options'>
                           {list.name}
                         </option>
                       ))}
