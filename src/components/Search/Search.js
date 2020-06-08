@@ -131,7 +131,7 @@ onListSelect = (event)=>{
                     onCancel={this.modalCancelHandler}
                   >
                     <select
-                      id="movie-list-select"
+                      className="movie-list-select"
                       name="movie-list-id"
                       onChange={this.onListSelect}
                     >
