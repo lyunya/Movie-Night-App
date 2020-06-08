@@ -19,7 +19,9 @@
 .search-form{
     font-size: 16px;
 }
-
+.movie-list-select{
+    font-size: 16px;
+}
 .addmovie-btn{
 display:inline-block;
 padding:0.25em 1em;
