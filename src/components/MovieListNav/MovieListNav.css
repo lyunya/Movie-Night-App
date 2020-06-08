@@ -3,7 +3,7 @@
     text-decoration: none;
     display: block;
     padding-bottom: 3px;
-    
+    outline: none; 
 }
 .MovieListNav_list-link{
     text-decoration: none;
@@ -19,6 +19,13 @@
 
 }
 
+.MovieListNav_list:focus{
+    outline: transparent;
+}
+.newList-form{
+    outline: transparent;
+}
+
 .newList-input{
     display: block;
     margin-left: 35px;
@@ -32,6 +39,7 @@
   height: 30px;
   left: 36px;
   top: 36px;
+  outline: none; 
 }
 
 /* Color/shape of burger icon bars */
@@ -67,14 +75,12 @@ Note: Beware of modifying this element as it can break the animations - you shou
 /* General sidebar styles */
 .bm-menu {
   background: #F1FAEE;
-  padding-top: 2.5em;
-
 }
 
 /* Individual item */
-/* .bm-item {
+.bm-item {
   display: inline-block;
-} */
+}
  .bm-menu { overflow-y: hidden !important; } 
 
 /* Styling of overlay */
