@@ -4,18 +4,18 @@ import LoginForm from "../LoginForm/LoginForm";
 import RegistrationForm from "../RegistrationForm/RegistrationForm";
 import MovieList from "../MovieList/MovieList";
 import Search from "../Search/Search";
-import dummyStore from "../../dummy-store";
+// import dummyStore from "../../dummy-store";
 import { getMoviesForList } from "../../movie-helpers";
 import MovieNightContext from "../../MovieNightContext";
 import "./App.css";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { fab } from "@fortawesome/free-brands-svg-icons";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Config from "../../config";
+const API = Config.API_ENDPOINT;
 toast.configure();
-library.add(fab, faBars);
-const { uuid } = require("uuidv4");
+
+
+
 
 class App extends React.Component {
   state = {
@@ -25,34 +25,49 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    setTimeout(() => this.setState(dummyStore), 500);
+    Promise.all([fetch(`${API}/movies`), fetch(`${API}/lists`)])
+      .then(([moviesRes, listsRes]) => {
+        if (!moviesRes.ok)
+          return moviesRes.json().then((e) => Promise.reject(e));
+        if (!listsRes.ok)
+          return listsRes.json().then((e) => Promise.reject(e));
+        return Promise.all([moviesRes.json(), listsRes.json()]);
+      })
+      .then(([movies, lists]) => {
+        movies.map((movie) => {
+          return this.handleAddMovie(movie);
+        });
+        lists.map((list) => {
+          return this.handleAddList(list);
+        });
+      })
+      .catch((error) => {
+        console.error({ error });
+      });
   }
-  
+
   setCurrentListSelected = (obj) => {
     this.setState({ currentListSelected: obj });
   };
-  
+
   handleAddList = (list) => {
-    const newList = [
-      ...this.state.lists,
-      { name: list, id: uuid(), user_id: 0 },
-    ];
+    const newList = [...this.state.lists, list];
     this.setState({ lists: newList });
-    this.notify();
+    
   };
 
-  notify = () => toast("added!", { autoClose: 2000, className:"toast-notification"});
+  // notify = () =>
+  //   toast("added!", { autoClose: 2000, className: "toast-notification" });
 
   handleAddMovie = (movie) => {
-    const newMovies =[...this.state.movies, movie]
+    const newMovies = [...this.state.movies, movie];
     this.setState({
       movies: newMovies,
     });
-    this.notify();
-  }
+    // this.notify();
+  };
 
   addVoteClick = (movieId) => {
-
     this.setState({
       movies: this.state.movies.map((movie) =>
         movie.id === movieId
@@ -69,7 +84,8 @@ class App extends React.Component {
       currentListSelected: this.state.currentListSelected,
       setCurrentListSelected: this.setCurrentListSelected,
       votes: this.votes,
-      addMovie: this.handleAddMovie
+      addMovie: this.handleAddMovie,
+      addlist: this.handleAddList,
     };
     return (
       <div className="App">

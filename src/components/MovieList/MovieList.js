@@ -18,7 +18,7 @@ export default class MovieList extends React.Component {
             <>
               <div className="sidebar">
                 <MovieListNav
-                  lists={this.props.lists}
+                  lists={this.context.lists}
                   handleAddList={this.props.handleAddList}
                 />
               </div>
@@ -26,7 +26,7 @@ export default class MovieList extends React.Component {
               <div className="main-content">
                 <div className="MovieList-heading">
                   <h1>Movie Night</h1>
-                  <h2 className="selectedListHeading">{context.currentListSelected.name}</h2>
+                  <h2 className="selectedListHeading">{context.currentListSelected.list_name}</h2>
                   <Link
                     to={"/search"}
                     style={{ textDecoration: "none" }}

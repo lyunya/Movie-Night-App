@@ -2,8 +2,9 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import MovieNightContext from "../../MovieNightContext";
 import { slide as Menu } from "react-burger-menu";
+import config from "../../config";
+import { toast } from "react-toastify";
 import "./MovieListNav.css";
-
 
 export default class MovieListNav extends React.Component {
   static contextType = MovieNightContext;
@@ -14,25 +15,55 @@ export default class MovieListNav extends React.Component {
       input: "",
       hasError: false,
       errorMessage: "",
-      listValid: false
+      listValid: false,
     };
   }
 
   // input change handler
-  onInput = (e) => {    
-    this.setState({
-      input: e.target.value,
-    }, ()=>{
-      this.validateEntry(this.state.input)
-    }
-    )
-    
-    };
+  onInput = (e) => {
+    this.setState(
+      {
+        input: e.target.value,
+      },
+      () => {
+        this.validateEntry(this.state.input);
+      }
+    );
+  };
 
   // submit handler
   onSubmit = (e) => {
     e.preventDefault();
-      this.props.handleAddList(this.state.input);
+    const name = this.state.input;
+    const list = {
+      name: name,
+      user_id: 1,
+    };
+    fetch(`${config.API_ENDPOINT}/lists`, {
+      method: "POST",
+      body: JSON.stringify(list),
+      headers: {
+        "content-type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          return res.json().then((error) => {
+            console.log(`Error is: ${error}`);
+            throw error;
+          });
+        }
+        return res.json();
+      })
+      .then((data) => {
+        this.context.addlist(data);
+      })
+      .catch((error) => {
+        this.setState({ hasError: error });
+      });
+
+    this.props.handleAddList(this.state.input);
+    this.notify();
     e.target.reset();
     this.setState({
       input: "",
@@ -48,9 +79,9 @@ export default class MovieListNav extends React.Component {
     if (value.length < 1) {
       this.setState({
         errorMessage: "",
-        listValid:false
+        listValid: false,
       });
-    } else if (value.length > 25){
+    } else if (value.length > 25) {
       this.setState({
         errorMessage: "please enter shorter list name",
         listValid: false,
@@ -60,7 +91,13 @@ export default class MovieListNav extends React.Component {
         listValid: true,
       });
     }
-  }
+  };
+
+  notify = () =>
+    toast("list added!", {
+      autoClose: 1500,
+      className: "toast-notification",
+    });
 
   render() {
     return (
@@ -71,14 +108,14 @@ export default class MovieListNav extends React.Component {
               <Menu>
                 <ul className="MovieListNav_list">
                   <h3>Movie Lists</h3>
-                  {this.props.lists.map((list) => (
+                  {this.context.lists.map((list) => (
                     <li key={list.id} className="MovieListItem">
                       <NavLink
                         className="MovieListNav_list-link"
                         to={`/list/${list.id}`}
                         onClick={(e) => this.onClick(context, list)}
                       >
-                        {list.name}
+                        {list.list_name}
                       </NavLink>
                     </li>
                   ))}

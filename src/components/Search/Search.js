@@ -6,7 +6,8 @@ import MovieNightContext from "../../MovieNightContext";
 import MovieListNav from "../MovieListNav/MovieListNav";
 import Modal from "../AddMovieModal/AddMovieModal";
 import Backdrop from "../AddMovieModal/Backdrop";
-
+import { toast } from "react-toastify";
+import config from "../../config";
 
 export default class Search extends React.Component {
   constructor(props) {
@@ -47,7 +48,10 @@ export default class Search extends React.Component {
       ...this.state.movieToAdd,
       movielist_id: event.target.value,
     };
-    this.setState({ movieToAdd: movieWithListId, canAddMovie: true });
+    this.setState({
+      movieToAdd: movieWithListId,
+      canAddMovie: true,
+    });
   };
   search = (e) => {
     e.preventDefault();
@@ -77,7 +81,6 @@ export default class Search extends React.Component {
   handleAddMovie = (movieObj) => {
     const movie = movieObj.movie;
     const movieDetailsObj = {
-      id: 0,
       title: movie.original_title,
       overview: movie.overview,
       poster_path: movie.poster_path,
@@ -92,12 +95,39 @@ export default class Search extends React.Component {
   modalAddMovieHandler = () => {
     const newMovie = this.state.movieToAdd;
     this.context.addMovie(newMovie);
+
+    fetch(`${config.API_ENDPOINT}/movies`, {
+      method: "POST",
+      body: JSON.stringify(newMovie),
+      headers: {
+        "content-type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          return res.json().then((err) => {
+            console.log(`Error is: ${err}`);
+            throw err;
+          });
+        }
+        return res.json();
+      })
+      .then((data) => {
+        this.context.addMovie(data);
+      })
+      .catch((err) => {
+        this.setState({ err });
+      });
     this.setState({ AddMovieModal: false, canAddMovie: false });
+    this.notify();
   };
 
   modalCancelHandler = () => {
     this.setState({ AddMovieModal: false, canAddMovie: false });
   };
+
+  notify = () =>
+    toast("movie added!", { autoClose: 1500, className: "toast-notification" });
 
   render() {
     const { lists = [] } = this.context;
@@ -147,12 +177,13 @@ export default class Search extends React.Component {
                           value={list.id}
                           className="list-options"
                         >
-                          {list.name}
+                          {list.list_name}
                         </option>
                       ))}
                     </select>
                   </Modal>
                 )}
+                <h3>Popular Movies</h3>
                 {this.state.movieData.map((movie) => {
                   return (
                     <div className="movieCard-search" key={movie.id}>
