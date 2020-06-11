@@ -5,10 +5,8 @@ import "./MovieList.css";
 import MovieNightContext from "../../MovieNightContext";
 import MovieListNav from "../MovieListNav/MovieListNav";
 
-
 export default class MovieList extends React.Component {
   static contextType = MovieNightContext;
-
 
   render() {
     return (
@@ -26,7 +24,9 @@ export default class MovieList extends React.Component {
               <div className="main-content">
                 <div className="MovieList-heading">
                   <h1>Movie Night</h1>
-                  <h2 className="selectedListHeading">{context.currentListSelected.list_name}</h2>
+                  <h2 className="selectedListHeading">
+                    {context.currentListSelected.name}
+                  </h2>
                   <Link
                     to={"/search"}
                     style={{ textDecoration: "none" }}
@@ -42,7 +42,10 @@ export default class MovieList extends React.Component {
                     <div className="MovieList-cards" key={movie.id}>
                       <MovieCard movieData={movie} />
                       <p>{`${movie.votes} votes`}</p>
-                      <button className="vote-btn"onClick={() => this.props.addVoteClick(movie.id)}>
+                      <button
+                        className="vote-btn"
+                        onClick={() => this.props.addVoteClick(movie.id)}
+                      >
                         Vote
                       </button>
                     </div>

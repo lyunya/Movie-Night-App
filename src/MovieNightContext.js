@@ -7,7 +7,8 @@ const MovieNightContext = React.createContext({
     currentListSelected: {},
     setCurrentListSelected: ()=>{},
     back: () => {},
-    addMovie: () => {}
+    addMovie: () => {},
+    deleteList: () => {},
 })
 
 export default MovieNightContext;

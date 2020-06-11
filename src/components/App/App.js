@@ -14,9 +14,6 @@ import Config from "../../config";
 const API = Config.API_ENDPOINT;
 toast.configure();
 
-
-
-
 class App extends React.Component {
   state = {
     lists: [],
@@ -29,8 +26,7 @@ class App extends React.Component {
       .then(([moviesRes, listsRes]) => {
         if (!moviesRes.ok)
           return moviesRes.json().then((e) => Promise.reject(e));
-        if (!listsRes.ok)
-          return listsRes.json().then((e) => Promise.reject(e));
+        if (!listsRes.ok) return listsRes.json().then((e) => Promise.reject(e));
         return Promise.all([moviesRes.json(), listsRes.json()]);
       })
       .then(([movies, lists]) => {
@@ -53,18 +49,20 @@ class App extends React.Component {
   handleAddList = (list) => {
     const newList = [...this.state.lists, list];
     this.setState({ lists: newList });
-    
   };
-
-  // notify = () =>
-  //   toast("added!", { autoClose: 2000, className: "toast-notification" });
 
   handleAddMovie = (movie) => {
     const newMovies = [...this.state.movies, movie];
     this.setState({
       movies: newMovies,
     });
-    // this.notify();
+  };
+
+  handleDeleteList = (listId) => {
+    console.log(listId, "handle deleteList in app.js");
+    this.setState({
+      lists: this.state.lists.filter((list) => list.id !== listId),
+    });
   };
 
   addVoteClick = (movieId) => {
@@ -75,6 +73,31 @@ class App extends React.Component {
           : movie
       ),
     });
+    const movieVoted = this.state.movies.filter(
+      (movie) => movie.id === movieId
+    );
+    fetch(`${API}/movies`, {
+      method: "PUT",
+      body: JSON.stringify(movieVoted),
+      headers: {
+        "content-type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          return res.json().then((err) => {
+            console.log(`Error is: ${err}`);
+            throw err;
+          });
+        }
+        return res.json();
+      })
+      .then((data) => {
+        this.context.addMovie(data);
+      })
+      .catch((err) => {
+        this.setState({ err });
+      });
   };
 
   render() {
@@ -85,7 +108,8 @@ class App extends React.Component {
       setCurrentListSelected: this.setCurrentListSelected,
       votes: this.votes,
       addMovie: this.handleAddMovie,
-      addlist: this.handleAddList,
+      addList: this.handleAddList,
+      deleteList: this.handleDeleteList,
     };
     return (
       <div className="App">

@@ -21,6 +21,7 @@ export default class Search extends React.Component {
       AddMovieModal: false,
       listSelected: "",
       canAddMovie: false,
+      isPopular: true,
     };
   }
 
@@ -40,6 +41,7 @@ export default class Search extends React.Component {
           moviesList: titles,
           movieIds,
           movieData,
+          isPopular: true,
         });
       });
   }
@@ -68,6 +70,7 @@ export default class Search extends React.Component {
           moviesList: titles,
           movieIds,
           movieData,
+          isPopular: false,
         });
       });
   };
@@ -152,9 +155,12 @@ export default class Search extends React.Component {
                 <form onSubmit={this.search} className="search-form">
                   <input
                     placeholder="Search for movies"
+                    className="search-input"
                     onChange={this.handleChange}
                   />
-                  <button type="submit">Search</button>
+                  <button type="submit" className="search-btn">
+                    Search
+                  </button>
                 </form>
                 {this.state.AddMovieModal && <Backdrop />}
                 {this.state.AddMovieModal && (
@@ -177,13 +183,13 @@ export default class Search extends React.Component {
                           value={list.id}
                           className="list-options"
                         >
-                          {list.list_name}
+                          {list.name}
                         </option>
                       ))}
                     </select>
                   </Modal>
                 )}
-                <h3>Popular Movies</h3>
+                {this.state.isPopular ? <h3>Popular Movies</h3> : null}
                 {this.state.movieData.map((movie) => {
                   return (
                     <div className="movieCard-search" key={movie.id}>

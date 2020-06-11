@@ -14,8 +14,6 @@
 }
 .MovieListNav_list-link:visited{
     text-decoration: none;
-    color: black;
-
 }
 
 .MovieListNav_list:focus{
@@ -33,6 +31,16 @@
     margin-bottom: 2%;
 }
 
+.MovieListNav_list-link:hover + .delete-btn{
+    display: inline-block;
+}
+
+.delete-btn:hover{
+    display: inline-block;
+}
+.delete-btn{
+    display: none;
+}
 /* Position and sizing of burger button */
 .bm-burger-button {
   position: fixed;

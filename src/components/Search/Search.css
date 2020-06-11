@@ -16,8 +16,12 @@
     font-size: 16px;
 }
 
-.search-form{
+.search-input{
     font-size: 16px;
+}
+.search-btn{
+    padding: 3px;
+    margin-left: 2px;
 }
 .movie-list-select{
     font-size: 16px;
@@ -25,6 +29,7 @@
 .addmovie-btn{
 display:inline-block;
 padding:0.25em 1em;
+margin-top: 5px;
 border:0.1em solid #000000;
 border-radius:0.2em;
 box-sizing: border-box;

@@ -4,6 +4,7 @@ import MovieNightContext from "../../MovieNightContext";
 import { slide as Menu } from "react-burger-menu";
 import config from "../../config";
 import { toast } from "react-toastify";
+import trash from "../../images/buttons/icons8-delete-16.png";
 import "./MovieListNav.css";
 
 export default class MovieListNav extends React.Component {
@@ -56,13 +57,13 @@ export default class MovieListNav extends React.Component {
         return res.json();
       })
       .then((data) => {
-        this.context.addlist(data);
+        this.context.addList(data);
       })
       .catch((error) => {
         this.setState({ hasError: error });
       });
 
-    this.props.handleAddList(this.state.input);
+    // this.props.handleAddList(this.state.input);
     this.notify();
     e.target.reset();
     this.setState({
@@ -93,6 +94,32 @@ export default class MovieListNav extends React.Component {
     }
   };
 
+  handleDeleteList = (listId) => {
+    console.log(listId, "this is the listId");
+    const list = {
+      id: listId,
+    };
+
+    fetch(`${config.API_ENDPOINT}/lists/`, {
+      method: "DELETE",
+      body: JSON.stringify(list),
+      headers: {
+        "content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          return res.json().then((e) => Promise.reject(e));
+        }
+      })
+      .then(() => {
+        this.context.deleteList(listId);
+        // this.props.onDeleteList(listId);
+      })
+      .catch((err) => {
+        console.log({ err });
+      });
+  };
   notify = () =>
     toast("list added!", {
       autoClose: 1500,
@@ -115,8 +142,14 @@ export default class MovieListNav extends React.Component {
                         to={`/list/${list.id}`}
                         onClick={(e) => this.onClick(context, list)}
                       >
-                        {list.list_name}
+                        {list.name}
                       </NavLink>
+                      <img
+                        className="delete-btn"
+                        src={trash}
+                        alt="delete button"
+                        onClick={() => this.handleDeleteList(list.id)}
+                      />
                     </li>
                   ))}
                 </ul>
