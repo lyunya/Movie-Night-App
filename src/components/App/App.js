@@ -66,19 +66,23 @@ class App extends React.Component {
   };
 
   addVoteClick = (movieId) => {
+    const movieVoted = this.state.movies.find((movie) => movie.id === movieId);
+    if (movieVoted.id !== movieId)
+      throw new Error("this is not the correct movie object");
+      const movieUpdated = Object.assign({}, movieVoted, {
+        votes: movieVoted.votes + 1,
+      });
     this.setState({
       movies: this.state.movies.map((movie) =>
         movie.id === movieId
-          ? Object.assign({}, movie, { votes: movie.votes + 1 })
+          ? movieUpdated
           : movie
       ),
     });
-    const movieVoted = this.state.movies.filter(
-      (movie) => movie.id === movieId
-    );
+
     fetch(`${API}/movies`, {
       method: "PUT",
-      body: JSON.stringify(movieVoted),
+      body: JSON.stringify(movieUpdated),
       headers: {
         "content-type": "application/json",
       },
