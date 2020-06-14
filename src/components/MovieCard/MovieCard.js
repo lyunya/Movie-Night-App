@@ -1,5 +1,6 @@
 import React from "react";
 import { URL_IMAGE, URL_DEFAULT_IMAGE } from "../../movie-helpers";
+import PropTypes from "prop-types";
 import "./MovieCard.css";
 
 export default class MovieCard extends React.Component {
@@ -26,3 +27,7 @@ export default class MovieCard extends React.Component {
     );
   }
 }
+
+MovieCard.propTypes = {
+  movieData: PropTypes.object,
+};

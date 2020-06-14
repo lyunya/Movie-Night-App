@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "./MovieList.css";
 import MovieNightContext from "../../MovieNightContext";
 import MovieListNav from "../MovieListNav/MovieListNav";
+import PropTypes from "prop-types";
 
 export default class MovieList extends React.Component {
   static contextType = MovieNightContext;
@@ -59,3 +60,9 @@ export default class MovieList extends React.Component {
     );
   }
 }
+
+MovieList.propTypes = {
+  movies: PropTypes.array,
+  addVoteClick: PropTypes.func,
+  handleAddList: PropTypes.func
+};

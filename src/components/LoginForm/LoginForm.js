@@ -1,21 +1,41 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import AuthApiService from "../../services/auth-api-services";
+import TokenService from "../../services/token-service";
 import "./LoginForm.css";
 
 export default class LoginForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      error: "",
+      error: null,
     };
+  }
+  static defaultProps = {
+    onLoginSuccess: () => {}
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log("login button works");
+    this.setState({ error: null });
+    const { email, password } = e.target;
+    AuthApiService.postLogin({
+      email: email.value,
+      password: password.value,
+    })
+      .then((res) => {
+        email.value = "";
+        password.value = "";
+        TokenService.saveAuthToken(res.authToken);
+        this.props.onLoginSuccess();
+      })
+      .catch((res) => {
+        this.setState({ error: res.error });
+      });
   };
 
   render() {
+    const { error } = this.state
     return (
       <div className="loginWrapper">
         <nav className="loginNav">
@@ -37,6 +57,9 @@ export default class LoginForm extends Component {
           </h3>
         </div>
         <form className="LoginForm" onSubmit={this.handleSubmit}>
+          <div role='alert'>
+            {error && <p className='red'>{error}</p>}
+          </div>
           <div className="email">
             <label htmlFor="LoginForm_email">Email</label>
             <input required name="email" id="LoginForm_email" />
@@ -48,7 +71,7 @@ export default class LoginForm extends Component {
               name="password"
               type="password"
               id="LoginForm_password"
-              autocomplete="current-password"
+              autoComplete="current-password"
             />
           </div>
           <button type="submit">Login</button>

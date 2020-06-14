@@ -7,6 +7,7 @@ import MovieListNav from "../MovieListNav/MovieListNav";
 import Modal from "../AddMovieModal/AddMovieModal";
 import Backdrop from "../AddMovieModal/Backdrop";
 import { toast } from "react-toastify";
+import PropTypes from "prop-types";
 import config from "../../config";
 
 export default class Search extends React.Component {
@@ -96,8 +97,8 @@ export default class Search extends React.Component {
   };
 
   modalAddMovieHandler = () => {
-    const newMovie = this.state.movieToAdd;
-    this.context.addMovie(newMovie);
+     const newMovie = this.state.movieToAdd;
+    // this.context.addMovie(newMovie);
 
     fetch(`${config.API_ENDPOINT}/movies`, {
       method: "POST",
@@ -172,9 +173,10 @@ export default class Search extends React.Component {
                     <select
                       className="movie-list-select"
                       name="movie-list-id"
+                      defaultValue={'DEFAULT'}
                       onChange={this.onListSelect}
                     >
-                      <option value="" disabled selected>
+                      <option value="DEFAULT" disabled>
                         Select your movie list
                       </option>
                       {lists.map((list) => (
@@ -211,3 +213,8 @@ export default class Search extends React.Component {
     );
   }
 }
+
+Search.propTypes = {
+  lists: PropTypes.array,
+  handleAddList: PropTypes.func,
+};

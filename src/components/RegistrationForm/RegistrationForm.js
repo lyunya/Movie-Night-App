@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from "prop-types";
 import "./RegistrationForm.css"
 
 export default class RegistrationForm extends React.Component {
@@ -20,7 +21,7 @@ export default class RegistrationForm extends React.Component {
       <div className="registrationWrapper">
         <nav className="loginNav">
           <Link
-            to={"/login"}
+            to={"/"}
             style={{ textDecoration: "none" }}
             className="loginPageLink"
           >
@@ -59,3 +60,7 @@ export default class RegistrationForm extends React.Component {
     );
   }
 }
+
+RegistrationForm.propTypes = {
+  handleSubmit: PropTypes.func,
+};

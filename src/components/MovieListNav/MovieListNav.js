@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import MovieNightContext from "../../MovieNightContext";
 import { slide as Menu } from "react-burger-menu";
+import TokenService from "../../services/token-service";
 import config from "../../config";
 import { toast } from "react-toastify";
 import trash from "../../images/buttons/icons8-delete-16.png";
@@ -45,6 +46,7 @@ export default class MovieListNav extends React.Component {
       body: JSON.stringify(list),
       headers: {
         "content-type": "application/json",
+        "authorization": `bearer ${TokenService.getAuthToken()}`,
       },
     })
       .then((res) => {
@@ -62,8 +64,6 @@ export default class MovieListNav extends React.Component {
       .catch((error) => {
         this.setState({ hasError: error });
       });
-
-    // this.props.handleAddList(this.state.input);
     this.notify();
     e.target.reset();
     this.setState({
@@ -95,16 +95,14 @@ export default class MovieListNav extends React.Component {
   };
 
   handleDeleteList = (listId) => {
-    console.log(listId, "this is the listId");
-    const list = {
-      id: listId,
-    };
 
-    fetch(`${config.API_ENDPOINT}/lists/`, {
+
+    fetch(`${config.API_ENDPOINT}/lists/${listId}`, {
       method: "DELETE",
-      body: JSON.stringify(list),
+      // body: JSON.stringify(list),
       headers: {
         "content-Type": "application/json",
+        "authorization": `bearer ${TokenService.getAuthToken()}`,
       },
     })
       .then((res) => {
@@ -114,7 +112,7 @@ export default class MovieListNav extends React.Component {
       })
       .then(() => {
         this.context.deleteList(listId);
-        // this.props.onDeleteList(listId);
+        this.props.history.push("/");
       })
       .catch((err) => {
         console.log({ err });
