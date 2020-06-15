@@ -1,66 +1,107 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import PropTypes from "prop-types";
-import "./RegistrationForm.css"
+import React, { Component } from "react";
+import AuthApiService from "../../services/auth-api-services";
+import TokenService from "../../services/token-service";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import "./RegistrationForm.css";
 
-export default class RegistrationForm extends React.Component {
+const RegistrationSchema = Yup.object().shape({
+  email: Yup.string()
+    .email("Invalid email address format")
+    .required("Email is required"),
+  password: Yup.string()
+    .min(8, "Password must be 8 characters at minimum")
+    .required("Password is required"),
+});
+
+export default class RegistrationForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      error: "",
+      error: null,
     };
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("register account button works");
+  handleSubmit = (values) => {
+    AuthApiService.postUser({
+      email: values.email,
+      password: values.password,
+    })
+      .then((res) => {
+        console.log(res);
+        TokenService.saveAuthToken(res.authToken);
+        this.props.history.push("/search");
+      })
+      .catch((res) => {
+        this.setState({ error: res.error });
+      });
   };
 
   render() {
+    const { error } = this.state;
     return (
-      <div className="registrationWrapper">
-        <nav className="loginNav">
-          <Link
-            to={"/"}
-            style={{ textDecoration: "none" }}
-            className="loginPageLink"
-          >
-            Login
-          </Link>
-          <br />
-          <Link
-            to={"/"}
-            style={{ textDecoration: "none" }}
-            className="HomePageLink"
-          >
-            Movie Night
-          </Link>
-        </nav>
+      <div className="loginWrapper">
         <div className="Intro">
-          <h2>Make an account</h2>
+          <h1>Movie Night</h1>
+          <h2>
+            Decide what movie you and your friends want to watch together!
+          </h2>
+          <h3>
+            Have you ever been stuck choosing what movie to watch with your
+            friends? This app will help you create a voting list of all the
+            movie choices in your group, and everyone can vote which movie they
+            want to watch!
+          </h3>
         </div>
-        <form className="registrationForm" onSubmit={this.handleSubmit}>
-          <div className="email">
-            <label htmlFor="RegistrationForm_email">Email</label>
-            <input required name="email" id="Registration_email" autocomplete="email"/>
-          </div>
-          <div className="password">
-            <label htmlFor="RegistrationForm_password">Password</label>
-            <input
-              required
-              name="password"
-              type="password"
-              id="Registration_password"
-              autocomplete="new-password"
-            />
-          </div>
-          <button type="submit">Register</button>
-        </form>
+        <Formik
+          initialValues={{ email: "", password: "" }}
+          validationSchema={RegistrationSchema}
+          onSubmit={(values) => this.handleSubmit(values)}
+        >
+          {({ touched, errors, isSubmitting }) => (
+            <Form>
+              <div className="form-group">
+                <label htmlFor="email"></label>
+                <Field
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  className={`form-control ${
+                    touched.email && errors.email ? "is-invalid" : ""
+                  }`}
+                />
+                <ErrorMessage
+                  component="div"
+                  name="email"
+                  className="invalid-feedback"
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="password"></label>
+                <Field
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  className={`form-control ${
+                    touched.password && errors.password ? "is-invalid" : ""
+                  }`}
+                />
+                <ErrorMessage
+                  component="div"
+                  name="password"
+                  className="invalid-feedback"
+                />
+              </div>
+
+              <button type="submit" className="btn btn-primary btn-block">
+                Create an Account
+              </button>
+            </Form>
+          )}
+        </Formik>
+        {error ? <p>{error}</p> : null}
       </div>
     );
   }
 }
-
-RegistrationForm.propTypes = {
-  handleSubmit: PropTypes.func,
-};

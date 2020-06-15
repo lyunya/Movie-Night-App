@@ -14,7 +14,7 @@ const LoginSchema = Yup.object().shape({
     .email("Invalid email address format")
     .required("Email is required"),
   password: Yup.string()
-    .min(3, "Password must be 3 characters at minimum")
+    .min(8, "Password must be 8 characters at minimum")
     .required("Password is required"),
 });
 
@@ -62,22 +62,14 @@ export default class LoginForm extends Component {
     const { error } = this.state;
     return (
       <div className="loginWrapper">
-        <nav className="loginNav">
-          <Link
-            to={"/search"}
-            style={{ textDecoration: "none" }}
-            className="HomePageLink"
-          >
-            Movie Night
-          </Link>
-        </nav>
         <div className="Intro">
+          <h1>Movie Night</h1>
           <h2>
             Decide what movie you and your friends want to watch together!
           </h2>
           <h3>
-            This app will help you create a voting list of your movie choices,
-            and everyone in the group can vote which movie they want to watch!
+            Welcome Back! If you're a new user, please create a new account and start making lists to
+            help decide what to watch with your friends!
           </h3>
         </div>
         <Formik
@@ -92,7 +84,7 @@ export default class LoginForm extends Component {
                 <Field
                   type="email"
                   name="email"
-                  placeholder="Enter email"
+                  placeholder="Email"
                   className={`form-control ${
                     touched.email && errors.email ? "is-invalid" : ""
                   }`}
@@ -109,7 +101,7 @@ export default class LoginForm extends Component {
                 <Field
                   type="password"
                   name="password"
-                  placeholder="Enter password"
+                  placeholder="Password"
                   className={`form-control ${
                     touched.password && errors.password ? "is-invalid" : ""
                   }`}
