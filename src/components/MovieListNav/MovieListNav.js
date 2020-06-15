@@ -95,8 +95,6 @@ export default class MovieListNav extends React.Component {
   };
 
   handleDeleteList = (listId) => {
-
-
     fetch(`${config.API_ENDPOINT}/lists/${listId}`, {
       method: "DELETE",
       // body: JSON.stringify(list),

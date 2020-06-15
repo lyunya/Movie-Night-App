@@ -10,9 +10,9 @@ const AuthApiService = {
       body: JSON.stringify({ email, password}),
     }).then((res) =>
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
-    );
+    )
   },
-     postUser(user) {
+  postUser(user) {
      return fetch(`${config.API_ENDPOINT}/users`, {
        method: 'POST',
        headers: {
@@ -26,6 +26,6 @@ const AuthApiService = {
            : res.json()
        )
    },
-};
+}
 
 export default AuthApiService;

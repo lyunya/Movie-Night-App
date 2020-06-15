@@ -20,27 +20,6 @@ class App extends React.Component {
     currentListSelected: {},
   };
 
-  // componentDidMount() {
-  //   Promise.all([fetch(`${API}/movies`), fetch(`${API}/lists`)])
-  //     .then(([moviesRes, listsRes]) => {
-  //       if (!moviesRes.ok)
-  //         return moviesRes.json().then((e) => Promise.reject(e));
-  //       if (!listsRes.ok) return listsRes.json().then((e) => Promise.reject(e));
-  //       return Promise.all([moviesRes.json(), listsRes.json()]);
-  //     })
-  //     .then(([movies, lists]) => {
-  //       movies.map((movie) => {
-  //         return this.handleAddMovie(movie);
-  //       });
-  //       lists.map((list) => {
-  //         return this.handleAddList(list);
-  //       });
-  //     })
-  //     .catch((error) => {
-  //       console.error({ error });
-  //     });
-  // }
-
   setLists = (listsArr, userId) => {
     const userLists = listsArr.filter((list) => list.userId === userId);
     this.setState({
@@ -49,25 +28,9 @@ class App extends React.Component {
   };
 
   setMovies = (movieArr, listArr) => {
-    console.log(movieArr, listArr)
-    // let movies = [];
-    // for (let i=0; i < movieArr.length; i++) {
-    //   if (movieArr[i].movielist_id === listArr[j].id) {
-    //     movies.push(movieArr[i]);
-    //   }
-    // }
-
     this.setState({
       movies: movieArr,
     });
-    // return result
-
-    // const userMovies = listArr.map(list => {
-    //   movieArr.filter(movie => movie.movielist_id === list.id)
-    // })
-    // // this.setState({
-
-    // // })
   };
 
   setCurrentListSelected = (obj) => {
@@ -126,6 +89,9 @@ class App extends React.Component {
       .catch((err) => {
         this.setState({ err });
       });
+    // this.setState({
+    //   movies: this.state.movies.sort((a, b) => a.votes > b.votes)
+    // })
   };
 
   render() {

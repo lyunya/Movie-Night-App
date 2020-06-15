@@ -68,8 +68,7 @@ export default class LoginForm extends Component {
             Decide what movie you and your friends want to watch together!
           </h2>
           <h3>
-            Welcome Back! If you're a new user, please create a new account and start making lists to
-            help decide what to watch with your friends!
+            Create a list and have your friends vote on what they want to watch together
           </h3>
         </div>
         <Formik

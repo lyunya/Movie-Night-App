@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "./MovieList.css";
 import MovieNightContext from "../../MovieNightContext";
 import MovieListNav from "../MovieListNav/MovieListNav";
+import Header from "../Header/Header";
 import PropTypes from "prop-types";
 
 export default class MovieList extends React.Component {
@@ -15,6 +16,7 @@ export default class MovieList extends React.Component {
         <MovieNightContext.Consumer>
           {(context) => (
             <>
+              <Header />
               <div className="sidebar">
                 <MovieListNav
                   lists={this.context.lists}

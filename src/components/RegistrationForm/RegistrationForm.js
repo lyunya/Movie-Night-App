@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import AuthApiService from "../../services/auth-api-services";
-import TokenService from "../../services/token-service";
+import Header from "../Header/Header";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import "./RegistrationForm.css";
@@ -13,6 +13,7 @@ const RegistrationSchema = Yup.object().shape({
     .min(8, "Password must be 8 characters at minimum")
     .required("Password is required"),
 });
+
 
 export default class RegistrationForm extends Component {
   constructor(props) {
@@ -29,8 +30,8 @@ export default class RegistrationForm extends Component {
     })
       .then((res) => {
         console.log(res);
-        TokenService.saveAuthToken(res.authToken);
-        this.props.history.push("/search");
+        this.setState({ error: null})
+        this.props.history.push("/");
       })
       .catch((res) => {
         this.setState({ error: res.error });
@@ -40,7 +41,9 @@ export default class RegistrationForm extends Component {
   render() {
     const { error } = this.state;
     return (
-      <div className="loginWrapper">
+      <>
+      <Header />
+      <div className="registrationWrapper">
         <div className="Intro">
           <h1>Movie Night</h1>
           <h2>
@@ -102,6 +105,7 @@ export default class RegistrationForm extends Component {
         </Formik>
         {error ? <p>{error}</p> : null}
       </div>
+      </>
     );
   }
 }

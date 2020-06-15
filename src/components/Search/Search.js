@@ -99,7 +99,6 @@ export default class Search extends React.Component {
 
   modalAddMovieHandler = () => {
      const newMovie = this.state.movieToAdd;
-    // this.context.addMovie(newMovie);
 
     fetch(`${config.API_ENDPOINT}/movies`, {
       method: "POST",
