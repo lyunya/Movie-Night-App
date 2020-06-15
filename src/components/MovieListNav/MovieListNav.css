@@ -44,10 +44,10 @@
 /* Position and sizing of burger button */
 .bm-burger-button {
   position: fixed;
-  width: 36px;
-  height: 30px;
-  left: 36px;
-  top: 36px;
+  width: 22px;
+  height: 20px;
+  left: 15px;
+  top: 18px;
   outline: none; 
 }
 
@@ -102,4 +102,15 @@ Note: Beware of modifying this element as it can break the animations - you shou
     justify-content: center;
     text-align: center;
     padding-inline-start: 0px;
+}
+
+@media only screen 
+  and (min-device-width: 768px) {
+  .bm-burger-button{      
+    width: 36px;
+    height: 30px;
+    left: 36px;
+    top: 36px;
+    outline: none; 
+  }
 }

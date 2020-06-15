@@ -2,7 +2,21 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import AuthApiService from "../../services/auth-api-services";
 import TokenService from "../../services/token-service";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import MovieNightContext from "../../MovieNightContext";
+import Config from "../../config";
 import "./LoginForm.css";
+const API = Config.API_ENDPOINT;
+
+const LoginSchema = Yup.object().shape({
+  email: Yup.string()
+    .email("Invalid email address format")
+    .required("Email is required"),
+  password: Yup.string()
+    .min(3, "Password must be 3 characters at minimum")
+    .required("Password is required"),
+});
 
 export default class LoginForm extends Component {
   constructor(props) {
@@ -11,23 +25,33 @@ export default class LoginForm extends Component {
       error: null,
     };
   }
-  static defaultProps = {
-    onLoginSuccess: () => {}
-  }
+   static contextType = MovieNightContext;
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    this.setState({ error: null });
-    const { email, password } = e.target;
+  handleSubmit = (values) => {
     AuthApiService.postLogin({
-      email: email.value,
-      password: password.value,
+      email: values.email,
+      password: values.password
     })
       .then((res) => {
-        email.value = "";
-        password.value = "";
+        console.log( res)
+        localStorage.setItem("userId", res.userId)
+        console.log(localStorage.getItem("userId"))
         TokenService.saveAuthToken(res.authToken);
-        this.props.onLoginSuccess();
+         fetch(`${API}/lists`)
+           .then((listsRes) => listsRes.json())
+           .then((lists) => {
+             console.log(lists, res.userId, 'this is lists and res.userId')
+             this.context.setLists(lists, res.userId)
+            fetch(`${API}/movies`)
+              .then((res) => res.json())
+              .then((movies) => {
+                // console.log(movies)
+                this.context.setMovies(movies, this.context.lists);
+                console.log(this.context)
+                this.props.history.push("/search");
+              });
+            }  
+           )
       })
       .catch((res) => {
         this.setState({ error: res.error });
@@ -35,7 +59,7 @@ export default class LoginForm extends Component {
   };
 
   render() {
-    const { error } = this.state
+    const { error } = this.state;
     return (
       <div className="loginWrapper">
         <nav className="loginNav">
@@ -56,26 +80,57 @@ export default class LoginForm extends Component {
             and everyone in the group can vote which movie they want to watch!
           </h3>
         </div>
-        <form className="LoginForm" onSubmit={this.handleSubmit}>
-          <div role='alert'>
-            {error && <p className='red'>{error}</p>}
-          </div>
-          <div className="email">
-            <label htmlFor="LoginForm_email">Email</label>
-            <input required name="email" id="LoginForm_email" />
-          </div>
-          <div className="password">
-            <label htmlFor="LoginForm_password">Password</label>
-            <input
-              required
-              name="password"
-              type="password"
-              id="LoginForm_password"
-              autoComplete="current-password"
-            />
-          </div>
-          <button type="submit">Login</button>
-        </form>
+        <Formik
+          initialValues={{ email: "", password: "" }}
+          validationSchema={LoginSchema}
+          onSubmit={(values) => this.handleSubmit(values)}
+        >
+          {({ touched, errors, isSubmitting }) => (
+            <Form>
+              <div className="form-group">
+                <label htmlFor="email"></label>
+                <Field
+                  type="email"
+                  name="email"
+                  placeholder="Enter email"
+                  className={`form-control ${
+                    touched.email && errors.email ? "is-invalid" : ""
+                  }`}
+                />
+                <ErrorMessage
+                  component="div"
+                  name="email"
+                  className="invalid-feedback"
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="password"></label>
+                <Field
+                  type="password"
+                  name="password"
+                  placeholder="Enter password"
+                  className={`form-control ${
+                    touched.password && errors.password ? "is-invalid" : ""
+                  }`}
+                />
+                <ErrorMessage
+                  component="div"
+                  name="password"
+                  className="invalid-feedback"
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="btn btn-primary btn-block"
+              >
+                Sign In
+              </button>
+            </Form>
+          )}
+        </Formik>
+        {error ? <p>{error}</p> : null}
         <br />
         <p>Are you a new user? Register to create an account</p>
         <Link

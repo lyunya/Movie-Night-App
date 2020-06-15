@@ -9,6 +9,8 @@ const MovieNightContext = React.createContext({
     back: () => {},
     addMovie: () => {},
     deleteList: () => {},
+    setLists: () => {},
+    setMovies: () => {},
 })
 
 export default MovieNightContext;

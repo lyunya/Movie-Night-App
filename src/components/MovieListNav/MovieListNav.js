@@ -39,7 +39,7 @@ export default class MovieListNav extends React.Component {
     const name = this.state.input;
     const list = {
       name: name,
-      user_id: 1,
+      user_id: localStorage.getItem("userId"),
     };
     fetch(`${config.API_ENDPOINT}/lists`, {
       method: "POST",

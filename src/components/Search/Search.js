@@ -7,6 +7,7 @@ import MovieListNav from "../MovieListNav/MovieListNav";
 import Modal from "../AddMovieModal/AddMovieModal";
 import Backdrop from "../AddMovieModal/Backdrop";
 import { toast } from "react-toastify";
+import Header from '../Header/Header'
 import PropTypes from "prop-types";
 import config from "../../config";
 
@@ -140,6 +141,7 @@ export default class Search extends React.Component {
         <MovieNightContext.Consumer>
           {(context) => (
             <>
+              <Header />
               <div className="sidebar">
                 <MovieListNav
                   lists={this.props.lists}
@@ -173,7 +175,7 @@ export default class Search extends React.Component {
                     <select
                       className="movie-list-select"
                       name="movie-list-id"
-                      defaultValue={'DEFAULT'}
+                      defaultValue={"DEFAULT"}
                       onChange={this.onListSelect}
                     >
                       <option value="DEFAULT" disabled>

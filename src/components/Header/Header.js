@@ -21,8 +21,6 @@ export default class Header extends Component {
   renderLoginLink() {
     return (
       <div className="Header__not-logged-in">
-        <Link to="/register">Register</Link>
-        <Hyph />
         <Link to="/">Log in</Link>
       </div>
     );
@@ -31,11 +29,6 @@ export default class Header extends Component {
   render() {
     return (
       <nav className="Header">
-        <h1>
-          <Link to="/">
-            Movie Night
-          </Link>
-        </h1>
         {TokenService.hasAuthToken()
           ? this.renderLogoutLink()
           : this.renderLoginLink()}
