@@ -106,7 +106,6 @@ export default class RegistrationForm extends Component {
         {error ? <p>{error}</p> : null}
         <p>After creating an account, please log in with your credentials</p>
       </div>
-      </p>
       </>
     );
   }
