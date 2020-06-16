@@ -34,14 +34,14 @@ export default class LoginForm extends Component {
     })
       .then((res) => {
         console.log( res)
-        localStorage.setItem("userId", res.userId)
+        localStorage.setItem("user_id", res.user_id)
         console.log(localStorage.getItem("userId"))
         TokenService.saveAuthToken(res.authToken);
          fetch(`${API}/lists`)
            .then((listsRes) => listsRes.json())
            .then((lists) => {
-             console.log(lists, res.userId, 'this is lists and res.userId')
-             this.context.setLists(lists, res.userId)
+             console.log(lists, res.user_id, 'this is lists and res.user_id')
+             this.context.setLists(lists, res.user_id)
             fetch(`${API}/movies`)
               .then((res) => res.json())
               .then((movies) => {
