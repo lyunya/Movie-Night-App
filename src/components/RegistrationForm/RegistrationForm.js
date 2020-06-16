@@ -107,6 +107,7 @@ export default class RegistrationForm extends Component {
         <p>After creating an account, please log in with your credentials</p>
       </div>
       </p>
+      </>
     );
   }
 }
