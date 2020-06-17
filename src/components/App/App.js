@@ -6,6 +6,7 @@ import MovieList from "../MovieList/MovieList";
 import Search from "../Search/Search";
 import { getMoviesForList } from "../../movie-helpers";
 import MovieNightContext from "../../MovieNightContext";
+import TokenService from "../../services/token-service";
 import "./App.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -14,20 +15,57 @@ const API = Config.API_ENDPOINT;
 toast.configure();
 
 class App extends React.Component {
-  state = {
-    lists: [],
-    movies: [],
-    currentListSelected: {},
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentListSelected: {},
+      lists: [],
+      movies: [],
+      setCurrentListSelected: this.setCurrentListSelected,
+      votes: this.votes,
+      addMovie: this.handleAddMovie,
+      addList: this.handleAddList,
+      deleteList: this.handleDeleteList,
+      setLists: this.setLists,
+      setMovies: this.setMovies,
+      userId: this.userId,
+      error: null,
+      allLists: [],
+    };
+  }
 
-  setLists = (listsArr, userId) => {
-    const userLists = listsArr.filter((list) => list.userId === userId);
+  componentDidMount(){
+    const token = TokenService.hasAuthToken();
+    console.log(localStorage.getItem("userId"));
+    if (token) {
+      this.fetchData(localStorage.getItem("userId"));
+    } 
+  }
+
+  static contextType = MovieNightContext;
+
+  fetchData = (userId) => {
     this.setState({
-      lists: userLists,
+      userId,
     });
-  };
+    fetch(`${API}/lists`)
+      .then((listsRes) => listsRes.json())
+      .then((lists) => {
+        this.setState({
+          lists: lists.filter((list) => list.user_id === userId),
+        });
+        fetch(`${API}/movies`)
+          .then((res) => res.json())
+          .then((movies) => {
+            this.setMovies(movies, this.state.lists);
+          })
+          .catch((res) => {
+            this.setState({ error: res.error });
+          });
+      });
+  }
 
-  setMovies = (movieArr, listArr) => {
+  setMovies = (movieArr) => {
     this.setState({
       movies: movieArr,
     });
@@ -89,30 +127,21 @@ class App extends React.Component {
       .catch((err) => {
         this.setState({ err });
       });
-    // this.setState({
-    //   movies: this.state.movies.sort((a, b) => a.votes > b.votes)
-    // })
   };
 
   render() {
-    const contextValue = {
-      lists: this.state.lists,
-      movies: this.state.movies,
-      currentListSelected: this.state.currentListSelected,
-      setCurrentListSelected: this.setCurrentListSelected,
-      votes: this.votes,
-      addMovie: this.handleAddMovie,
-      addList: this.handleAddList,
-      deleteList: this.handleDeleteList,
-      setLists: this.setLists,
-      setMovies: this.setMovies,
-    };
     return (
       <div className="App">
-        <MovieNightContext.Provider value={contextValue}>
+        <MovieNightContext.Provider value={this.state}>
           <main className="App_Main">
             <Switch>
-              <Route exact path={"/"} component={LoginForm} />
+              <Route
+                exact
+                path={"/"}
+                render={(props) => {
+                  return <LoginForm {...props} setUserId={this.fetchData} />;
+                }}
+              />
               <Route
                 path={"/search"}
                 render={() => {

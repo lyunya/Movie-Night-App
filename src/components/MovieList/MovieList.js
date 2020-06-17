@@ -40,7 +40,9 @@ export default class MovieList extends React.Component {
                     </button>
                   </Link>
                 </div>
-                {this.props.movies.map((movie) => {
+                {this.props.movies
+                .sort((a,b) => a.votes > b.votes ? -1: 1)
+                .map((movie) => {
                   return (
                     <div className="MovieList-cards" key={movie.id}>
                       <MovieCard movieData={movie} />

@@ -57,6 +57,8 @@ export default class Search extends React.Component {
       canAddMovie: true,
     });
   };
+
+  //grabs twenty most popular movies on TMDB api
   search = (e) => {
     e.preventDefault();
     const URL = `${URL_SEARCH}${API_KEY}&language=en-US&query=${this.state.searchTerm}&page=1&include_adult=false`;
@@ -97,6 +99,7 @@ export default class Search extends React.Component {
     });
   };
 
+  //add movie selected to created list
   modalAddMovieHandler = () => {
      const newMovie = this.state.movieToAdd;
 

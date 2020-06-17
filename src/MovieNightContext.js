@@ -11,6 +11,8 @@ const MovieNightContext = React.createContext({
     deleteList: () => {},
     setLists: () => {},
     setMovies: () => {},
+    userId: 0,
+    allLists: [],
 })
 
 export default MovieNightContext;

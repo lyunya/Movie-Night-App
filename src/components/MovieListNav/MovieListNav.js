@@ -39,7 +39,7 @@ export default class MovieListNav extends React.Component {
     const name = this.state.input;
     const list = {
       name: name,
-      user_id: localStorage.getItem("userId"),
+      user_id: this.context.userId,
     };
     fetch(`${config.API_ENDPOINT}/lists`, {
       method: "POST",
@@ -71,6 +71,7 @@ export default class MovieListNav extends React.Component {
     });
   };
 
+  //sets name to display in movielist
   onClick = (context, list) => {
     context.setCurrentListSelected(list);
   };
@@ -97,7 +98,6 @@ export default class MovieListNav extends React.Component {
   handleDeleteList = (listId) => {
     fetch(`${config.API_ENDPOINT}/lists/${listId}`, {
       method: "DELETE",
-      // body: JSON.stringify(list),
       headers: {
         "content-Type": "application/json",
         "authorization": `bearer ${TokenService.getAuthToken()}`,

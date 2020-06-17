@@ -5,9 +5,9 @@ import TokenService from "../../services/token-service";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import MovieNightContext from "../../MovieNightContext";
-import Config from "../../config";
+// import Config from "../../config";
 import "./LoginForm.css";
-const API = Config.API_ENDPOINT;
+// const API = Config.API_ENDPOINT;
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string()
@@ -25,37 +25,19 @@ export default class LoginForm extends Component {
       error: null,
     };
   }
-   static contextType = MovieNightContext;
+  static contextType = MovieNightContext;
 
   handleSubmit = (values) => {
     AuthApiService.postLogin({
       email: values.email,
-      password: values.password
-    })
-      .then((res) => {
-        console.log( res)
-        localStorage.setItem("user_id", res.user_id)
-        console.log(localStorage.getItem("userId"))
-        TokenService.saveAuthToken(res.authToken);
-         fetch(`${API}/lists`)
-           .then((listsRes) => listsRes.json())
-           .then((lists) => {
-             console.log(lists, res.user_id, 'this is lists and res.user_id')
-             this.context.setLists(lists, res.user_id)
-            fetch(`${API}/movies`)
-              .then((res) => res.json())
-              .then((movies) => {
-                // console.log(movies)
-                this.context.setMovies(movies, this.context.lists);
-                console.log(this.context)
-                this.props.history.push("/search");
-              });
-            }  
-           )
-      })
-      .catch((res) => {
-        this.setState({ error: res.error });
-      });
+      password: values.password,
+    }).then((res) => {
+      console.log(res);
+      this.props.setUserId(res.userId)
+      localStorage.setItem("userId", res.userId);
+      TokenService.saveAuthToken(res.authToken);
+      this.props.history.push("/search");
+    });
   };
 
   render() {
@@ -68,7 +50,8 @@ export default class LoginForm extends Component {
             Decide what movie you and your friends want to watch together!
           </h2>
           <h3>
-            Create a list and have your friends vote on what they want to watch together
+            Create a list and have your friends vote on what they want to watch
+            together
           </h3>
         </div>
         <Formik
@@ -112,10 +95,7 @@ export default class LoginForm extends Component {
                 />
               </div>
 
-              <button
-                type="submit"
-                className="btn btn-primary btn-block"
-              >
+              <button type="submit" className="btn btn-primary btn-block">
                 Sign In
               </button>
             </Form>

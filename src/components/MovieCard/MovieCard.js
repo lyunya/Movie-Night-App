@@ -12,6 +12,7 @@ export default class MovieCard extends React.Component {
   }
 
   render() {
+    //if API doesn't have movie poster, use default image
     const withImage = this.state.movieData.poster_path
       ? URL_IMAGE + this.state.movieData.poster_path
       : URL_DEFAULT_IMAGE;
