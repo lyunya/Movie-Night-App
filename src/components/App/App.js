@@ -34,13 +34,28 @@ class App extends React.Component {
     };
   }
 
-  componentDidMount(){
-    console.log(process.env);
+  componentDidMount() {
     const token = TokenService.hasAuthToken();
-    console.log(localStorage.getItem("userId"));
     if (token) {
       this.fetchData(localStorage.getItem("userId"));
-    } 
+    } else {
+      //if no userId, then fetch all lists and movies from DB in order to make list public for friends
+      fetch(`${API}/lists`)
+        .then((listsRes) => listsRes.json())
+        .then((lists) => {
+          this.setState({
+            lists,
+          });
+          fetch(`${API}/movies`)
+            .then((res) => res.json())
+            .then((movies) => {
+              this.setMovies(movies, this.state.lists);
+            })
+            .catch((res) => {
+              this.setState({ error: res.error });
+            });
+        });
+    }
   }
 
   static contextType = MovieNightContext;
@@ -53,7 +68,9 @@ class App extends React.Component {
       .then((listsRes) => listsRes.json())
       .then((lists) => {
         this.setState({
-          lists: lists.filter((list) => list.user_id.toString() === userId.toString()),
+          lists: lists.filter(
+            (list) => list.user_id.toString() === userId.toString()
+          ),
         });
         fetch(`${API}/movies`)
           .then((res) => res.json())
@@ -64,7 +81,7 @@ class App extends React.Component {
             this.setState({ error: res.error });
           });
       });
-  }
+  };
 
   setMovies = (movieArr) => {
     this.setState({

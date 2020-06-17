@@ -30,7 +30,6 @@ export default class Search extends React.Component {
   static contextType = MovieNightContext;
 
   componentDidMount() {
-    console.log(config.API_KEY, 'this is api key')
     const popularURL = `${URL_POPULAR}?api_key=${config.API_KEY}&language=en-US&page=1`;
     fetch(popularURL)
       .then((res) =>

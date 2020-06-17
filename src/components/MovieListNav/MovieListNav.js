@@ -60,11 +60,12 @@ export default class MovieListNav extends React.Component {
       })
       .then((data) => {
         this.context.addList(data);
+            this.notify();
       })
       .catch((error) => {
         this.setState({ hasError: error });
       });
-    this.notify();
+
     e.target.reset();
     this.setState({
       input: "",

@@ -32,7 +32,6 @@ export default class LoginForm extends Component {
       email: values.email,
       password: values.password,
     }).then((res) => {
-      console.log(res);
       this.props.setUserId(res.userId)
       localStorage.setItem("userId", res.userId);
       TokenService.saveAuthToken(res.authToken);
