@@ -20,7 +20,10 @@
 .Intro h3{
     font-size: .8em;
 }
-
+.signin-btn{
+    margin-top: 5%;
+    margin-left: 35%;
+}
 @media screen and (min-width: 768px) {
     .Intro{
     width: 500px;

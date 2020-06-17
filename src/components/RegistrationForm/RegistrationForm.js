@@ -97,7 +97,7 @@ export default class RegistrationForm extends Component {
                 />
               </div>
 
-              <button type="submit" className="btn btn-primary btn-block">
+              <button type="submit" className="create-btn">
                 Create an Account
               </button>
             </Form>

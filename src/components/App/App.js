@@ -52,7 +52,7 @@ class App extends React.Component {
       .then((listsRes) => listsRes.json())
       .then((lists) => {
         this.setState({
-          lists: lists.filter((list) => list.user_id === userId),
+          lists: lists.filter((list) => list.user_id.toString() === userId.toString()),
         });
         fetch(`${API}/movies`)
           .then((res) => res.json())

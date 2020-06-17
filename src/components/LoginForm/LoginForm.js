@@ -50,8 +50,9 @@ export default class LoginForm extends Component {
             Decide what movie you and your friends want to watch together!
           </h2>
           <h3>
-            Create a list and have your friends vote on what they want to watch
-            together
+            Create a list, and add movies everyone in your group is interested in watching. Once you've added all the movies,
+            send the link to all your friends to vote on their pick. You can see which movie everyone in the group is
+            most interested in watching.
           </h3>
         </div>
         <Formik
@@ -95,7 +96,7 @@ export default class LoginForm extends Component {
                 />
               </div>
 
-              <button type="submit" className="btn btn-primary btn-block">
+              <button type="submit" className="signin-btn">
                 Sign In
               </button>
             </Form>
