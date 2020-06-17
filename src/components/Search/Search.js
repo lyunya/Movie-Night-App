@@ -1,6 +1,6 @@
 import React from "react";
 import MovieCard from "../MovieCard/MovieCard";
-import { URL_SEARCH, API_KEY, URL_POPULAR } from "../../movie-helpers";
+import { URL_SEARCH, URL_POPULAR } from "../../movie-helpers";
 import "./Search.css";
 import MovieNightContext from "../../MovieNightContext";
 import MovieListNav from "../MovieListNav/MovieListNav";
@@ -30,7 +30,8 @@ export default class Search extends React.Component {
   static contextType = MovieNightContext;
 
   componentDidMount() {
-    const popularURL = `${URL_POPULAR}${API_KEY}&language=en-US&page=1`;
+    console.log(config.API_KEY, 'this is api key')
+    const popularURL = `${URL_POPULAR}?api_key=${config.API_KEY}&language=en-US&page=1`;
     fetch(popularURL)
       .then((res) =>
         !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
@@ -61,7 +62,7 @@ export default class Search extends React.Component {
   //grabs twenty most popular movies on TMDB api
   search = (e) => {
     e.preventDefault();
-    const URL = `${URL_SEARCH}${API_KEY}&language=en-US&query=${this.state.searchTerm}&page=1&include_adult=false`;
+    const URL = `${URL_SEARCH}?api_key=${config.API_KEY}&language=en-US&query=${this.state.searchTerm}&page=1&include_adult=false`;
     fetch(URL)
       .then((res) =>
         !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()

@@ -35,6 +35,7 @@ class App extends React.Component {
   }
 
   componentDidMount(){
+    console.log(process.env);
     const token = TokenService.hasAuthToken();
     console.log(localStorage.getItem("userId"));
     if (token) {

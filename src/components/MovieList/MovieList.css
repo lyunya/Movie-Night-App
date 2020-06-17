@@ -9,18 +9,34 @@
   width: 100%;
 }
 
-
 :root {
   --sidebar-width: 100px;
 }
 
 h1 {
-  color: #1D3557;
+  color: #1d3557;
+  margin-left: 10%;
 }
-.selectedListHeading{
-    color: #457B9D;
+.selectedListHeading {
+  color: #457b9d;
 }
 
-.vote-btn{
-    margin-bottom: 8px;
+button {
+  margin-bottom: 8px;
+  display: inline-block;
+  padding: 0.25em 1em;
+  border: 0.1em solid #000000;
+  border-radius: 0.2em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  color: #000000;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+button:hover {
+  color: #ffffff;
+  background-color: #000000;
 }

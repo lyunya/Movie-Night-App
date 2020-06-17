@@ -3,6 +3,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
     background-color: #F1FAEE;
 }
 
@@ -22,8 +23,27 @@
 }
 .signin-btn{
     margin-top: 5%;
-    margin-left: 35%;
 }
+
+button {
+  display: inline-block;
+  padding: 0.25em 1em;
+  border: 0.1em solid #000000;
+  border-radius: 0.2em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  color: #000000;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+button:hover {
+  color: #ffffff;
+  background-color: #000000;
+}
+
 @media screen and (min-width: 768px) {
     .Intro{
     width: 500px;
