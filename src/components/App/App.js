@@ -31,6 +31,7 @@ class App extends React.Component {
       userId: this.userId,
       error: null,
       allLists: [],
+      addVote: this.addVoteClick,
     };
   }
 

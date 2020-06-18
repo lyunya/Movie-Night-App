@@ -1,6 +1,7 @@
 import React from "react";
 import { URL_IMAGE, URL_DEFAULT_IMAGE } from "../../movie-helpers";
 import PropTypes from "prop-types";
+import MovieNightContext from "../../MovieNightContext";
 import "./MovieCard.css";
 
 export default class MovieCard extends React.Component {
@@ -9,6 +10,16 @@ export default class MovieCard extends React.Component {
     this.state = {
       movieData: props.movieData,
     };
+  }
+
+  static contextType = MovieNightContext;
+
+  handleAddVote = (movieId) => {
+    this.context.addVote(movieId);
+    const upvote = this.state.movieData.votes + 1
+    this.setState({
+      movieData: {...this.state.movieData, votes: upvote}
+    })
   }
 
   render() {
@@ -23,6 +34,17 @@ export default class MovieCard extends React.Component {
         <div className="movietext">
           <h2 className="movietitle">{this.state.movieData.title}</h2>
           <p className="movieoverview">{this.state.movieData.overview}</p>
+          {!this.state.movieData.votes ? null : (
+            <>
+              <p>{`${this.state.movieData.votes} votes`}</p>
+              <button
+                className="vote-btn"
+                onClick={() => this.handleAddVote(this.state.movieData.id)}
+              >
+                Vote
+              </button>
+            </>
+          )}
         </div>
       </div>
     );

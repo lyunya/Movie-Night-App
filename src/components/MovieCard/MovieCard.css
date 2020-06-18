@@ -27,11 +27,11 @@ h2 {
 }
 
 .movieoverview {
+  padding: 0 4% 4% 4%;
   font-size: 0.6em;
   text-align: start;
 }
 p {
-    
   text-align: left;
 }
 

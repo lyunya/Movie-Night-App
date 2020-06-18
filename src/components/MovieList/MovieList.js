@@ -51,13 +51,6 @@ export default class MovieList extends React.Component {
                     return (
                       <div className="MovieList-cards" key={movie.id}>
                         <MovieCard movieData={movie} />
-                        <p>{`${movie.votes} votes`}</p>
-                        <button
-                          className="vote-btn"
-                          onClick={() => this.props.addVoteClick(movie.id)}
-                        >
-                          Vote
-                        </button>
                       </div>
                     );
                   })}

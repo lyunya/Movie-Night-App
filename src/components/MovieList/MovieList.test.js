@@ -8,9 +8,9 @@ it("renders without crashing", () => {
   ReactDOM.render(
     <BrowserRouter>
       <MovieList
-        lists={() => {}}
+        lists={[]}
         handleAddList={() => {}}
-        movies={() => {}}
+        movies={[]}
         addVoteClick={() => {}}
       />
     </BrowserRouter>,
