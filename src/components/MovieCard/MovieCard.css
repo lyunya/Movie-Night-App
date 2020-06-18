@@ -1,55 +1,49 @@
-.moviecard{
-    margin: 20px auto auto;
-    min-width: 125px;
-    max-width: 45%;
-    box-shadow: 0px 6px 18px rgba(0,0,0,.1);
-    border-radius: 8px;
+.moviecard {
+  margin: 20px auto auto;
+  min-width: 125px;
+  max-width: 45%;
+  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
 }
 
-.movieposter{
-    min-width: 125px;
-    width: 35%;
-    height: 45%;
-    object-fit: contain;
-    align-self: flex-start;
-    padding-right: 2%;
+.movieposter {
+  min-width: 125px;
+  width: 35%;
+  height: 45%;
+  object-fit: contain;
+  align-self: flex-start;
+  padding-right: 2%;
+  vertical-align: middle;
+  justify-content: center;
 }
 
-.movieposter{
-    max-width: 125px;
-    vertical-align: middle;
+h2 {
+  text-align: center;
+  flex-direction: row;
 }
 
-h2{
-    text-align: center;
-}
-p{
-    padding: 2px;
-}
-movietext{
-    flex: 1 1 auto;
+.movietitle {
+  font-size: 1em;
 }
 
-.movietitle{
-    font-size: 1em;
+.movieoverview {
+  font-size: 0.6em;
+  text-align: start;
 }
-
-.movieoverview{
-    font-size: .6em;
+p {
+    
+  text-align: left;
 }
-
-
-
 
 /* set media query for desktop view; set the width and height */
 @media (min-width: 767px) {
-.moviecard{
+  .moviecard {
     display: flex;
-}
-.movieposter{
+  }
+  .movieposter {
     top: 50%;
-}
-.movieoverview{
-    font-size: .8rem;
-}
+  }
+  .movieoverview {
+    font-size: 0.8rem;
+  }
 }
