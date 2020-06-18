@@ -17,6 +17,7 @@
 
 .movieposter{
     max-width: 125px;
+    vertical-align: middle;
 }
 
 h2{
@@ -46,8 +47,7 @@ movietext{
     display: flex;
 }
 .movieposter{
-    text-align: center;
-    justify-content: center;
+    top: 50%;
 }
 .movieoverview{
     font-size: .8rem;

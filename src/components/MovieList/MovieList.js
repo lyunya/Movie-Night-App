@@ -40,7 +40,7 @@ export default class MovieList extends React.Component {
                       className="MovieListPageLink"
                     >
                       <button className="addmovielist-btn">
-                        Add Movie to List
+                        Search for Movies to Add
                       </button>
                     </Link>
                   ) : null}
