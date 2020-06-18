@@ -34,7 +34,7 @@ export default class MovieCard extends React.Component {
         <div className="movietext">
           <h2 className="movietitle">{this.state.movieData.title}</h2>
           <p className="movieoverview">{this.state.movieData.overview}</p>
-          {!this.state.movieData.votes ? null : (
+          {this.state.movieData.votes >= 0 ? (
             <>
               <p>{`${this.state.movieData.votes} votes`}</p>
               <button
@@ -44,7 +44,7 @@ export default class MovieCard extends React.Component {
                 Vote
               </button>
             </>
-          )}
+          ) : null}
         </div>
       </div>
     );
