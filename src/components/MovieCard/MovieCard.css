@@ -45,4 +45,11 @@ movietext{
 .moviecard{
     display: flex;
 }
+.movieposter{
+    text-align: center;
+    justify-content: center;
+}
+.movieoverview{
+    font-size: .8rem;
+}
 }

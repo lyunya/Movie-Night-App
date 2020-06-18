@@ -1,4 +1,5 @@
 .movielist-wrapper {
+  margin-top: -22px;
   flex-direction: column;
   text-align: center;
   width: 100%;

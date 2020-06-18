@@ -4,7 +4,7 @@
   float: right;
 }
 
-.Header__logged-in, .Header__not-logged-in{
+.Header__logged-in, .Header__not-logged-in, .Header__logged-in:visited, .Header__not-logged-in:visited {
   display: inline-block;
   position: relative;
   padding: 0.25em .5em;

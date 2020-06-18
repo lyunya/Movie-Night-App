@@ -31,6 +31,10 @@
     margin-bottom: 2%;
 }
 
+.newList-btn{
+  margin-left: 5%;
+}
+
 .MovieListNav_list-link:hover + .delete-btn{
     display: inline-block;
 }

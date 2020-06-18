@@ -158,7 +158,7 @@ export default class MovieListNav extends React.Component {
                     type="text"
                     placeholder="Enter List Name"
                   />
-                  <button type="submit" disabled={!this.state.listValid}>
+                  <button className="newList-btn" type="submit" disabled={!this.state.listValid}>
                     Create New List
                   </button>
                   <p>{this.state.errorMessage}</p>
