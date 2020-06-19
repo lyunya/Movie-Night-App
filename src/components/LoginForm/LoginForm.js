@@ -5,9 +5,9 @@ import TokenService from "../../services/token-service";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import MovieNightContext from "../../MovieNightContext";
-// import Config from "../../config";
+import logo from "../../images/gladiator.jpg";
 import "./LoginForm.css";
-// const API = Config.API_ENDPOINT;
+
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string()
@@ -48,10 +48,16 @@ export default class LoginForm extends Component {
           <h2>
             Decide what movie you and your friends want to watch together!
           </h2>
+          <img src={logo} alt="family watching tv" className="loginImg" />
           <h3>
-            Create a list, and add movies everyone in your group is interested in watching. Once you've added all the movies,
-            send the link to all your friends to vote on their pick. You can see which movie everyone in the group is
-            most interested in watching.
+            
+              Step 1: Create a list <br />
+              Step 2: Add movies everyone wants to watch <br />
+              Step 3: Send link out to all your friends to vote on their
+              favorite <br />
+              <br />
+              You can now see what movie everyone wants to watch!
+            
           </h3>
         </div>
         <Formik

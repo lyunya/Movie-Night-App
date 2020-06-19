@@ -42,70 +42,72 @@ export default class RegistrationForm extends Component {
     const { error } = this.state;
     return (
       <>
-      <Header />
-      <div className="registrationWrapper">
-        <div className="Intro">
-          <h1>Movie Night</h1>
-          <h2>
-            Decide what movie you and your friends want to watch together!
-          </h2>
-          <h3>
-            Have you ever been stuck choosing what movie to watch with your
-            friends? This app will help you create a voting list of all the
-            movie choices in your group, and everyone can vote which movie they
-            want to watch!
-          </h3>
+        <Header />
+        <div className="registrationWrapper">
+          <div className="Intro">
+            <h1>Movie Night</h1>
+            <h2>
+              Decide what movie you and your friends want to watch together!
+            </h2>
+            <h3>
+              Step 1: Create a list <br />
+              Step 2: Add movies everyone wants to watch <br />
+              Step 3: Send link out to all your friends to vote on their
+              favorite <br />
+              <br />
+              You can now see what movie everyone wants to watch!
+            </h3>
+          </div>
+          <Formik
+            initialValues={{ email: "", password: "" }}
+            validationSchema={RegistrationSchema}
+            onSubmit={(values) => this.handleSubmit(values)}
+          >
+            {({ touched, errors, isSubmitting }) => (
+              <Form>
+                <div className="form-group">
+                  <label htmlFor="email"></label>
+                  <Field
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    className={`form-control ${
+                      touched.email && errors.email ? "is-invalid" : ""
+                    }`}
+                  />
+                  <ErrorMessage
+                    component="div"
+                    name="email"
+                    className="invalid-feedback"
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="password"></label>
+                  <Field
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    className={`form-control ${
+                      touched.password && errors.password ? "is-invalid" : ""
+                    }`}
+                  />
+                  <ErrorMessage
+                    component="div"
+                    name="password"
+                    className="invalid-feedback"
+                  />
+                </div>
+
+                <button type="submit" className="create-btn">
+                  Create an Account
+                </button>
+              </Form>
+            )}
+          </Formik>
+          {error ? <p>{error}</p> : null}
+          <p>After creating an account, please log in with your credentials</p>
         </div>
-        <Formik
-          initialValues={{ email: "", password: "" }}
-          validationSchema={RegistrationSchema}
-          onSubmit={(values) => this.handleSubmit(values)}
-        >
-          {({ touched, errors, isSubmitting }) => (
-            <Form>
-              <div className="form-group">
-                <label htmlFor="email"></label>
-                <Field
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  className={`form-control ${
-                    touched.email && errors.email ? "is-invalid" : ""
-                  }`}
-                />
-                <ErrorMessage
-                  component="div"
-                  name="email"
-                  className="invalid-feedback"
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="password"></label>
-                <Field
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                  className={`form-control ${
-                    touched.password && errors.password ? "is-invalid" : ""
-                  }`}
-                />
-                <ErrorMessage
-                  component="div"
-                  name="password"
-                  className="invalid-feedback"
-                />
-              </div>
-
-              <button type="submit" className="create-btn">
-                Create an Account
-              </button>
-            </Form>
-          )}
-        </Formik>
-        {error ? <p>{error}</p> : null}
-        <p>After creating an account, please log in with your credentials</p>
-      </div>
       </>
     );
   }

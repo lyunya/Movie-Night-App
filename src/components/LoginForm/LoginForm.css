@@ -1,28 +1,33 @@
-.loginWrapper{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background-color: #F1FAEE;
+.loginWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #f1faee;
 }
 
-.Intro{
-    width: 200px;
+.Intro {
+  width: 200px;
 }
-.Intro h1{
-    text-align: center;
-    font-size: 2.1em;
+.Intro h1 {
+  text-align: center;
+  font-size: 2.1em;
 }
-.Intro h2{
-    font-size: 1.2em;
+.Intro h2 {
+  font-size: 1.2em;
 }
 
-.Intro h3{
-    font-size: .8em;
+.Intro h3 {
+  font-size: 0.8em;
 }
-.signin-btn{
-    margin-top: 5%;
+.loginImg {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+}
+.signin-btn {
+  margin-top: 5%;
 }
 
 button {
@@ -45,7 +50,7 @@ button:hover {
 }
 
 @media screen and (min-width: 768px) {
-    .Intro{
-    width: 500px;
-}
+  .Intro {
+    width: 650px;
+  }
 }

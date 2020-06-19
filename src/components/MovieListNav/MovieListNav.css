@@ -39,12 +39,7 @@
     display: inline-block;
 }
 
-.delete-btn:hover{
-    display: inline-block;
-}
-.delete-btn{
-    display: none;
-}
+
 /* Position and sizing of burger button */
 .bm-burger-button {
   position: fixed;
@@ -108,6 +103,16 @@ Note: Beware of modifying this element as it can break the animations - you shou
     padding-inline-start: 0px;
 }
 
+
+
+@media(hover: hover) and (pointer: fine) {
+    .delete-btn:hover{
+    display: inline-block;
+}
+.delete-btn{
+    display: none;
+}
+}
 @media only screen 
   and (min-device-width: 768px) {
   .bm-burger-button{      
