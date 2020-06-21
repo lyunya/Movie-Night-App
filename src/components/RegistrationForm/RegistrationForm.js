@@ -70,6 +70,7 @@ export default class RegistrationForm extends Component {
                   <Field
                     type="email"
                     name="email"
+                    aria-label="Enter email address"
                     placeholder="Email"
                     className={`form-control ${
                       touched.email && errors.email ? "is-invalid" : ""
@@ -87,6 +88,7 @@ export default class RegistrationForm extends Component {
                   <Field
                     type="password"
                     name="password"
+                    aria-label="Enter password"
                     placeholder="Password"
                     className={`form-control ${
                       touched.password && errors.password ? "is-invalid" : ""

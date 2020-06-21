@@ -50,14 +50,12 @@ export default class LoginForm extends Component {
           </h2>
           <img src={logo} alt="family watching tv" className="loginImg" />
           <h3>
-            
-              Step 1: Create a list <br />
-              Step 2: Add movies everyone wants to watch <br />
-              Step 3: Send link out to all your friends to vote on their
-              favorite <br />
-              <br />
-              You can now see what movie everyone wants to watch!
-            
+            Step 1: Create a list <br />
+            Step 2: Add movies everyone wants to watch <br />
+            Step 3: Copy URL link and send out to all your friends to vote on their favorite
+            <br />
+            <br />
+            You can now see what movie everyone wants to watch!
           </h3>
         </div>
         <Formik
@@ -72,6 +70,7 @@ export default class LoginForm extends Component {
                 <Field
                   type="email"
                   name="email"
+                  aria-label="Enter email address"
                   placeholder="Email"
                   className={`form-control ${
                     touched.email && errors.email ? "is-invalid" : ""
@@ -89,6 +88,7 @@ export default class LoginForm extends Component {
                 <Field
                   type="password"
                   name="password"
+                  aria-label="Enter password"
                   placeholder="Password"
                   className={`form-control ${
                     touched.password && errors.password ? "is-invalid" : ""

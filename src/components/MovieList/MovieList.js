@@ -10,6 +10,18 @@ import PropTypes from "prop-types";
 
 export default class MovieList extends React.Component {
   static contextType = MovieNightContext;
+  constructor(props) {
+    super(props);
+    this.state = {
+      voted: null,
+    }
+  }
+
+  registerVote = () => {
+    this.setState({
+      voted: 1
+    })
+  }
 
   render() {
     return (

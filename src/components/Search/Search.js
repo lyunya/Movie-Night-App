@@ -160,6 +160,7 @@ export default class Search extends React.Component {
                 <form onSubmit={this.search} className="search-form">
                   <input
                     placeholder="Search for movies"
+                    aria-label="Search by Movie Title"
                     className="search-input"
                     onChange={this.handleChange}
                   />
@@ -179,6 +180,7 @@ export default class Search extends React.Component {
                       name="movie-list-id"
                       defaultValue={"DEFAULT"}
                       onChange={this.onListSelect}
+                      autoFocus
                     >
                       <option value="DEFAULT" disabled>
                         Select your movie list
@@ -195,7 +197,7 @@ export default class Search extends React.Component {
                     </select>
                   </Modal>
                 )}
-                {this.state.isPopular ? <h3>Popular Movies</h3> : null}
+                {this.state.isPopular ? <h2>Popular Movies</h2> : null}
                 {this.state.movieData.map((movie) => {
                   return (
                     <div className="movieCard-search" key={movie.id}>
