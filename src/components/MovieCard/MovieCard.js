@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import MovieNightContext from "../../MovieNightContext";
 import "./MovieCard.css";
 
-
 export default class MovieCard extends React.Component {
   constructor(props) {
     super(props);
@@ -15,19 +14,17 @@ export default class MovieCard extends React.Component {
 
   static contextType = MovieNightContext;
 
-
-
   handleAddVote = (movieId) => {
     this.context.addVote(movieId);
     localStorage.setItem(
       `${this.state.movieData.movielist_id} vote`,
-       this.state.movieData.movielist_id
+      this.state.movieData.movielist_id
     );
     const upvote = this.state.movieData.votes + 1;
     this.setState({
-      movieData: {...this.state.movieData, votes: upvote}
-    })
-  }
+      movieData: { ...this.state.movieData, votes: upvote },
+    });
+  };
 
   render() {
     //if API doesn't have movie poster, use default image

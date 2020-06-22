@@ -14,7 +14,6 @@ const RegistrationSchema = Yup.object().shape({
     .required("Password is required"),
 });
 
-
 export default class RegistrationForm extends Component {
   constructor(props) {
     super(props);
@@ -30,7 +29,7 @@ export default class RegistrationForm extends Component {
     })
       .then((res) => {
         console.log(res);
-        this.setState({ error: null})
+        this.setState({ error: null });
         this.props.history.push("/");
       })
       .catch((res) => {

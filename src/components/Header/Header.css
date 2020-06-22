@@ -4,10 +4,13 @@
   float: right;
 }
 
-.Header__logged-in, .Header__not-logged-in, .Header_logged-in a:visited, .Header__not-logged-in a:visited{
+.Header__logged-in,
+.Header__not-logged-in,
+.Header_logged-in a:visited,
+.Header__not-logged-in a:visited {
   display: inline-block;
   position: relative;
-  padding: 0.25em .5em;
+  padding: 0.25em 0.5em;
   border: 0.1em solid #000000;
   border-radius: 0.2em;
   box-sizing: border-box;
@@ -20,8 +23,11 @@
   transition: all 0.2s;
   margin-top: 5%;
   margin-right: 7%;
-  }
-.Header__logged-in:hover, .Header__not-logged-in:hover, .Header__logged-in a:visited:hover, .Header__not-logged-in a:visited:hover {
+}
+.Header__logged-in:hover,
+.Header__not-logged-in:hover,
+.Header__logged-in a:visited:hover,
+.Header__not-logged-in a:visited:hover {
   color: #ffffff;
   background-color: #000000;
 }
@@ -41,22 +47,22 @@
   .Header__not-logged-in {
     flex-direction: row;
   }
-  .Header__logged-in, .Header__not-logged-in{
-  display: inline-block;
-  position: relative;
-  padding: 0.25em 1em;
-  border: 0.1em solid #000000;
-  border-radius: 0.2em;
-  box-sizing: border-box;
-  text-decoration: none;
-  font-family: "Roboto", sans-serif;
-  font-size: .8rem;
-  font-weight: 300;
-  color: #000000;
-  text-align: center;
-  transition: all 0.2s;
-  margin-top: 5%;
-  margin-right: 20px;
+  .Header__logged-in,
+  .Header__not-logged-in {
+    display: inline-block;
+    position: relative;
+    padding: 0.25em 1em;
+    border: 0.1em solid #000000;
+    border-radius: 0.2em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: "Roboto", sans-serif;
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: #000000;
+    text-align: center;
+    transition: all 0.2s;
+    margin-top: 5%;
+    margin-right: 20px;
   }
 }
-

@@ -11,7 +11,6 @@ import PropTypes from "prop-types";
 export default class MovieList extends React.Component {
   static contextType = MovieNightContext;
 
-
   render() {
     return (
       <div className="movielist-wrapper">
@@ -67,5 +66,5 @@ export default class MovieList extends React.Component {
 MovieList.propTypes = {
   movies: PropTypes.array,
   addVoteClick: PropTypes.func,
-  handleAddList: PropTypes.func
+  handleAddList: PropTypes.func,
 };

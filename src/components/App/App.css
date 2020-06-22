@@ -3,16 +3,16 @@
   /* flex-wrap: wrap; */
 }
 
-.App_Main{
+.App_Main {
+  width: 100%;
+}
+
+.toast-notification {
+  width: 80%;
+}
+
+@media only screen and (min-width: 768px) {
+  .toast-notification {
     width: 100%;
-}
-
-.toast-notification{
-  width: 80%
-}
-
-@media only screen and (min-width: 768px){
-  .toast-notification{
-    width: 100%
   }
 }

@@ -5,8 +5,8 @@
   flex-flow: row wrap;
 }
 
-h1{
-    margin-left: 10%;
+h1 {
+  margin-left: 10%;
 }
 
 .search-content {
@@ -70,11 +70,8 @@ p {
   text-align: center;
 }
 
-
-
-@media only screen 
-  and (min-device-width: 1200px) {
-  h1{
+@media only screen and (min-device-width: 1200px) {
+  h1 {
     margin-left: 5%;
-}
+  }
 }

@@ -42,10 +42,8 @@ button:hover {
   background-color: #000000;
 }
 
-
-@media only screen 
-  and (min-device-width: 1200px) {
-  .App-Title{
+@media only screen and (min-device-width: 1200px) {
+  .App-Title {
     margin-left: 7%;
-}
+  }
 }

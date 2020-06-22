@@ -8,7 +8,6 @@ import MovieNightContext from "../../MovieNightContext";
 import logo from "../../images/gladiator.jpg";
 import "./LoginForm.css";
 
-
 const LoginSchema = Yup.object().shape({
   email: Yup.string()
     .email("Invalid email address format")
@@ -32,7 +31,7 @@ export default class LoginForm extends Component {
       email: values.email,
       password: values.password,
     }).then((res) => {
-      this.props.setUserId(res.userId)
+      this.props.setUserId(res.userId);
       localStorage.setItem("userId", res.userId);
       TokenService.saveAuthToken(res.authToken);
       this.props.history.push("/search");

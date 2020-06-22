@@ -1,44 +1,43 @@
-.MovieListItem{
-    list-style-type: none;
-    text-decoration: none;
-    display: block;
-    outline: none; 
+.MovieListItem {
+  list-style-type: none;
+  text-decoration: none;
+  display: block;
+  outline: none;
 }
-.MovieListNav_list-link{
-    text-decoration: none;
-    color: black;
+.MovieListNav_list-link {
+  text-decoration: none;
+  color: black;
 }
 .MovieListNav_list-link:active,
-.MovieListNav_list-link:hover{
-    color: coral;
+.MovieListNav_list-link:hover {
+  color: coral;
 }
-.MovieListNav_list-link:visited{
-    text-decoration: none;
-}
-
-.MovieListNav_list:focus{
-    outline: transparent;
-}
-.newList-form{
-    outline: transparent;
+.MovieListNav_list-link:visited {
+  text-decoration: none;
 }
 
-.newList-input{
-    display: block;
-    margin-left: 55px;
-    font-size: 16px;
-    text-align: center;
-    margin-bottom: 2%;
+.MovieListNav_list:focus {
+  outline: transparent;
+}
+.newList-form {
+  outline: transparent;
 }
 
-.newList-btn{
+.newList-input {
+  display: block;
+  margin-left: 55px;
+  font-size: 16px;
+  text-align: center;
+  margin-bottom: 2%;
+}
+
+.newList-btn {
   margin-left: 5%;
 }
 
-.MovieListNav_list-link:hover + .delete-btn{
-    display: inline-block;
+.MovieListNav_list-link:hover + .delete-btn {
+  display: inline-block;
 }
-
 
 /* Position and sizing of burger button */
 .bm-burger-button {
@@ -47,7 +46,7 @@
   height: 20px;
   left: 15px;
   top: 18px;
-  outline: none; 
+  outline: none;
 }
 
 /* Color/shape of burger icon bars */
@@ -82,44 +81,43 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 /* General sidebar styles */
 .bm-menu {
-  background: #F1FAEE;
+  background: #f1faee;
 }
 
 /* Individual item */
 .bm-item {
   display: inline-block;
 }
- .bm-menu { overflow-y: hidden !important; } 
+.bm-menu {
+  overflow-y: hidden !important;
+}
 
 /* Styling of overlay */
 .bm-overlay {
   background: rgba(0, 0, 0, 0.3);
 }
 
-.bm-item MovieListNav_list{
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    padding-inline-start: 0px;
+.bm-item MovieListNav_list {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding-inline-start: 0px;
 }
 
-
-
-@media(hover: hover) and (pointer: fine) {
-    .delete-btn:hover{
+@media (hover: hover) and (pointer: fine) {
+  .delete-btn:hover {
     display: inline-block;
-}
-.delete-btn{
+  }
+  .delete-btn {
     display: none;
+  }
 }
-}
-@media only screen 
-  and (min-device-width: 768px) {
-  .bm-burger-button{      
+@media only screen and (min-device-width: 768px) {
+  .bm-burger-button {
     width: 36px;
     height: 30px;
     left: 36px;
     top: 36px;
-    outline: none; 
+    outline: none;
   }
 }

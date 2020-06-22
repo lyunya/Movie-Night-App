@@ -7,7 +7,7 @@ import MovieListNav from "../MovieListNav/MovieListNav";
 import Modal from "../AddMovieModal/AddMovieModal";
 import Backdrop from "../AddMovieModal/Backdrop";
 import { toast } from "react-toastify";
-import Header from '../Header/Header'
+import Header from "../Header/Header";
 import PropTypes from "prop-types";
 import config from "../../config";
 
@@ -101,7 +101,7 @@ export default class Search extends React.Component {
 
   //add movie selected to created list
   modalAddMovieHandler = () => {
-     const newMovie = this.state.movieToAdd;
+    const newMovie = this.state.movieToAdd;
 
     fetch(`${config.API_ENDPOINT}/movies`, {
       method: "POST",

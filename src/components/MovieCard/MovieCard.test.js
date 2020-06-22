@@ -18,9 +18,7 @@ it("renders without crashing", () => {
   };
   ReactDOM.render(
     <BrowserRouter>
-      <MovieCard
-        movieData={movie}
-      />
+      <MovieCard movieData={movie} />
     </BrowserRouter>,
     div
   );

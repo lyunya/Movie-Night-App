@@ -46,7 +46,7 @@ export default class MovieListNav extends React.Component {
       body: JSON.stringify(list),
       headers: {
         "content-type": "application/json",
-        "authorization": `bearer ${TokenService.getAuthToken()}`,
+        authorization: `bearer ${TokenService.getAuthToken()}`,
       },
     })
       .then((res) => {
@@ -60,7 +60,7 @@ export default class MovieListNav extends React.Component {
       })
       .then((data) => {
         this.context.addList(data);
-            this.notify();
+        this.notify();
       })
       .catch((error) => {
         this.setState({ hasError: error });
@@ -101,7 +101,7 @@ export default class MovieListNav extends React.Component {
       method: "DELETE",
       headers: {
         "content-Type": "application/json",
-        "authorization": `bearer ${TokenService.getAuthToken()}`,
+        authorization: `bearer ${TokenService.getAuthToken()}`,
       },
     })
       .then((res) => {

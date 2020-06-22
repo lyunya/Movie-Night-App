@@ -30,13 +30,13 @@ h2 {
   font-size: 0.6em;
   text-align: start;
 }
-p{
+p {
   text-align: left;
 }
 
-.vote-btn:disabled{
-  color:#95A5A6;
-  background-color: #7F8C8D;
+.vote-btn:disabled {
+  color: #95a5a6;
+  background-color: #7f8c8d;
 }
 
 /* set media query for desktop view; set the width and height */
