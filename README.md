@@ -19,16 +19,16 @@ This application's functionality includes:
 https://movie-night-app.now.sh/
 
 Login Page
-(https://i.ibb.co/6s1kt0H/Movie-Night-Login.png)
+![image of Login Page](https://i.ibb.co/6s1kt0H/Movie-Night-Login.png)
 
 Search Page
-(https://i.ibb.co/2qXFNDz/Movie-Night-Search.png)
+![image of Search Page](https://i.ibb.co/2qXFNDz/Movie-Night-Search.png)
 
 Movie List Page
-(https://i.ibb.co/hsH9w5T/Movie-Night-List.png)
+![image of Movie List Page](https://i.ibb.co/hsH9w5T/Movie-Night-List.png)
 
 Movie List Nav
-(https://i.ibb.co/7tyxLw4/Movie-Night-Nav.png)
+![image of Movie List Nav](https://i.ibb.co/7tyxLw4/Movie-Night-Nav.png)
 
 ---
 ## Security
