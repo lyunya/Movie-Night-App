@@ -14,9 +14,9 @@
   --sidebar-width: 100px;
 }
 
-h1 {
+.App-Title {
   color: #1d3557;
-  margin-left: 10%;
+  margin-left: 14%;
 }
 .selectedListHeading {
   color: #457b9d;
@@ -40,4 +40,12 @@ button {
 button:hover {
   color: #ffffff;
   background-color: #000000;
+}
+
+
+@media only screen 
+  and (min-device-width: 1200px) {
+  .App-Title{
+    margin-left: 7%;
+}
 }

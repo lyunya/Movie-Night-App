@@ -49,11 +49,13 @@ export default class LoginForm extends Component {
             Decide what movie you and your friends want to watch together!
           </h2>
           <img src={logo} alt="family watching tv" className="loginImg" />
-          <h3>
+          <h3 className="instructions">
             Step 1: Create a list <br />
             Step 2: Add movies everyone wants to watch <br />
-            Step 3: Copy URL link and send out to all your friends to vote on their favorite
+            Step 3: Copy URL link and send out to all your friends to vote on
+            their favorite
             <br />
+            (only 1 vote allowed per person)
             <br />
             You can now see what movie everyone wants to watch!
           </h3>

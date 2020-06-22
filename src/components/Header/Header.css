@@ -4,7 +4,7 @@
   float: right;
 }
 
-.Header__logged-in, .Header__not-logged-in, .Header__logged-in:visited, .Header__not-logged-in:visited {
+.Header__logged-in, .Header__not-logged-in, .Header_logged-in a:visited, .Header__not-logged-in a:visited{
   display: inline-block;
   position: relative;
   padding: 0.25em .5em;
@@ -21,11 +21,14 @@
   margin-top: 5%;
   margin-right: 7%;
   }
-.Header__logged-in:hover, .Header__not-logged-in:hover{
+.Header__logged-in:hover, .Header__not-logged-in:hover, .Header__logged-in a:visited:hover, .Header__not-logged-in a:visited:hover {
   color: #ffffff;
   background-color: #000000;
 }
-
+.Header-link {
+  text-decoration: none;
+  color: black;
+}
 
 @media screen and (min-width: 450px) {
   .Header {

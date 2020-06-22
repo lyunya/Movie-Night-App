@@ -10,18 +10,7 @@ import PropTypes from "prop-types";
 
 export default class MovieList extends React.Component {
   static contextType = MovieNightContext;
-  constructor(props) {
-    super(props);
-    this.state = {
-      voted: null,
-    }
-  }
 
-  registerVote = () => {
-    this.setState({
-      voted: 1
-    })
-  }
 
   render() {
     return (
@@ -41,7 +30,7 @@ export default class MovieList extends React.Component {
 
               <div className="main-content">
                 <div className="MovieList-heading">
-                  <h1>Movie Night</h1>
+                  <h1 className="App-Title">Movie Night</h1>
                   <h2 className="selectedListHeading">
                     {context.currentListSelected.name}
                   </h2>

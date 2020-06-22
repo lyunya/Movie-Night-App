@@ -52,8 +52,8 @@ export default class RegistrationForm extends Component {
             <h3>
               Step 1: Create a list <br />
               Step 2: Add movies everyone wants to watch <br />
-              Step 3: Send link out to all your friends to vote on their
-              favorite <br />
+              Step 3: Copy URL link and send out to all your friends to vote on
+              their favorite <br />
               <br />
               You can now see what movie everyone wants to watch!
             </h3>
