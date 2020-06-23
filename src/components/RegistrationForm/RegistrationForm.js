@@ -28,7 +28,6 @@ export default class RegistrationForm extends Component {
       password: values.password,
     })
       .then((res) => {
-        console.log(res);
         this.setState({ error: null });
         this.props.history.push("/");
       })
@@ -51,7 +50,7 @@ export default class RegistrationForm extends Component {
             <h3>
               Step 1: Create a list <br />
               Step 2: Add movies everyone wants to watch <br />
-              Step 3: Copy URL link and send out to all your friends to vote on
+              Step 3: Copy the Movie List URL link from your browser and send it out to all your friends to vote on
               their favorite <br />
               <br />
               You can now see what movie everyone wants to watch!

@@ -51,7 +51,7 @@ export default class LoginForm extends Component {
           <h3 className="instructions">
             Step 1: Create a list <br />
             Step 2: Add movies everyone wants to watch <br />
-            Step 3: Copy URL link and send out to all your friends to vote on
+            Step 3: Copy the Movie List URL link from your browser and send it out to all your friends to vote on
             their favorite
             <br />
             (only 1 vote allowed per person)
